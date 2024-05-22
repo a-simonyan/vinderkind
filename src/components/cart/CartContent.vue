@@ -1,0 +1,53 @@
+<template>
+  <div v-if="carts.length">
+    <div class="flex flex-col gap-[21px] items-center w-full">
+      <div v-for="(cart, index) in carts" :key="index" class="w-full flex justify-center">
+        <CartItem :cart="cart" />
+      </div>
+    </div>
+    <div class="bg-lavender px-[22px] py-[18px] rounded-small flex justify-between my-4">
+      <div class="flex flex-col gap-[10px]">
+        <div>
+          <span class="text-base/5">Shipping to 11219</span>
+          <button class="text-vivid-purple text-[13px] pl-[9.5px]">Change</button>
+        </div>
+        <span class="text-base/5">Sales Tax</span>
+      </div>
+      <div class="flex flex-col [&_span]:text-base gap-[10px]">
+        <span>${{ shipping }}</span>
+        <span>${{ tax }}</span>
+      </div>
+    </div>
+    <button
+      class="bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
+    >
+      Checkout ${{ (shipping + tax + calculateTotal()).toFixed(2) }}
+    </button>
+  </div>
+  <div v-else>
+    <p class="text-xl font-bold text-center">Your cart is empty.</p>
+  </div>
+</template>
+
+<script lang="ts">
+import CartItem from '@/components/reusable/CartItem.vue'
+
+import { defineComponent } from 'vue'
+import { useCartsStore } from '@/stores/carts'
+import { useSalesTaxStore } from '@/stores/sales-tax'
+
+export default defineComponent({
+  components: { CartItem },
+
+  setup() {
+    const { carts, calculateTotal } = useCartsStore()
+    const { shipping, tax } = useSalesTaxStore()
+    return {
+      carts,
+      calculateTotal,
+      shipping,
+      tax
+    }
+  }
+})
+</script>
