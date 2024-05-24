@@ -1,10 +1,32 @@
-import { defineStore } from 'pinia'
+import { defineStore, type StoreDefinition } from 'pinia'
 import { ref } from 'vue'
+interface CartItem {
+  id: number
+  count: number
+  price: number
+  name: string
+  info: string
+  img: string
+}
 
-export const useCartsStore = defineStore('carts', () => {
-  const carts = ref([
-    { id: 0, name: 'כסלו תשפ״ד', info: 'טעקע 4', price: 19.99, count: 1 },
-    { id: 1, name: 'Vinderkind Speaker', info: '', price: 29.99, count: 1 }
+export const useCartsStore: StoreDefinition<string> = defineStore('carts', () => {
+  const carts = ref<CartItem[]>([
+    {
+      id: 4,
+      name: 'כסלו תשפ״ד',
+      info: 'טעקע 4',
+      price: 19.99,
+      count: 1,
+      img: '/images/carts/cart_image_2.png'
+    },
+    {
+      id: 5,
+      name: 'Vinderkind Speaker',
+      info: '',
+      price: 29.99,
+      count: 1,
+      img: '/images/carts/cart_image_2.png'
+    }
   ])
 
   const updateCount = (cartId: number, increment = true) => {
@@ -15,8 +37,25 @@ export const useCartsStore = defineStore('carts', () => {
       } else {
         if (cart.count > 1) {
           cart.count--
+        } else {
+          removeCart(cartId)
+          cart.count = 0
         }
       }
+    }
+  }
+
+  const addCart = (cart: CartItem, increment = true) => {
+    const existingCart = carts.value.find((c) => c.id === cart.id)
+    if (increment) {
+      if (existingCart) {
+        updateCount(cart.id)
+      } else {
+        carts.value.push(cart)
+        updateCount(cart.id)
+      }
+    } else {
+      updateCount(cart.id, false)
     }
   }
 
@@ -35,5 +74,5 @@ export const useCartsStore = defineStore('carts', () => {
     return total
   }
 
-  return { carts, updateCount, removeCart, calculateTotal }
+  return { carts, updateCount, removeCart, calculateTotal, addCart }
 })

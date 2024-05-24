@@ -16,10 +16,20 @@ export default {
         charcoal: '#707070',
         lavender: '#F1EAF4',
         'blue-grey': '#6D8791',
-        'light-lavender': '#b45bd6'
+        'light-lavender': '#b45bd6',
+        'fire-red': '#D00C0C',
+        silver: '#C9C9C9',
+        'pinkish-purple': '#D876FF'
       },
       borderRadius: {
         small: '5px'
+      },
+      backgroundImage: {
+        yellowPurple: 'url("/images/home-background.svg")',
+        purpleShade: 'url("/images/purple-bg.svg")'
+      },
+      backgroundPosition: {
+        'bottom-4': 'center bottom -4rem'
       }
     },
     container: {

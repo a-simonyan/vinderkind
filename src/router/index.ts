@@ -11,7 +11,11 @@ const router = createRouter({
       component: PageLayout,
       children: [
         {
-          path: '',
+          path: '/',
+          component: HomeView
+        },
+        {
+          path: '/cart',
           component: CartView
         }
       ]

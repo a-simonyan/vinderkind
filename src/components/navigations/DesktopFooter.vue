@@ -1,8 +1,8 @@
 <template>
   <div class="bg-vivid-purple">
     <div class="container flex justify-center pb-[27px] relative">
-      <div class="absolute -top-6 max-w-[219px] sm:max-w-[361px]">
-        <img src="../../assets/footer_logo.png" alt="footer logo" class="" />
+      <div class="absolute -top-6 max-w-[219px] sm:max-w-[361px] z-[9]">
+        <img src="../../assets/footer_logo.png" draggable="false" alt="footer logo" class="" />
       </div>
       <div class="flex flex-col items-center w-full px-8 pt-16 sm:pt-[92px]">
         <h5 class="text-[25px]/[30px] text-white font-semibold pb-[10px] font-raleway">
@@ -16,7 +16,9 @@
           Sign up for <span class="hidden px-2 sm:flex">Vinderkind </span> Updates
         </button>
         <hr class="w-[85%] block h-[1px] border-t border-t-blue-grey mt-[25.5px] mb-4 px-16" />
-        <span class="text-sm/4 text-white">Copyright © 2023 Vinderkind, All rights reserved</span>
+        <span class="text-sm/4 text-white"
+          >Copyright © {{ new Date().getFullYear() }} Vinderkind, All rights reserved</span
+        >
       </div>
     </div>
   </div>

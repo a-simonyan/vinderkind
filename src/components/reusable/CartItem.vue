@@ -3,11 +3,7 @@
     class="border border-vivid-purple rounded-small sm:max-w-[524px] w-full flex gap-[26px] px-4 py-6 sm:p-6"
   >
     <div class="max-w-[100px] w-full h-[139px]">
-      <img
-        src="../../assets/images/cart_image.png"
-        alt="cart image"
-        class="w-full h-full object-contain"
-      />
+      <img :src="cart.img" alt="cart image" class="w-full h-full object-contain" />
     </div>
     <div class="flex flex-col">
       <div class="flex flex-col gap-[2px]">
