@@ -31,3 +31,10 @@ export default defineComponent({
   }
 })
 </script>
+<style>
+@media (max-width: 640px) {
+  .swiper {
+    padding-left: 16px;
+  }
+}
+</style>

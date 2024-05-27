@@ -2,7 +2,7 @@
   <div
     v-if="data.count < 1"
     @click="addCart(data)"
-    class="px-[15px] cursor-pointer flex items-center bg-vivid-purple rounded-small justify-center py-3 w-full text-white gap-[13px] sm:gap-5 mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
+    class="px-[15px] cursor-pointer flex items-center bg-vivid-purple rounded-small justify-center py-[6px] sm:py-3 w-full text-white gap-[13px] sm:gap-5 mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
   >
     <div class="flex gap-[21px] justify-center items-center">
       <IconBasket class="[&_path]:stroke-white w-[26px]" />
@@ -11,12 +11,14 @@
   </div>
   <div
     v-else
-    class="flex items-center w-full justify-between px-[15px] cursor-pointer bg-vivid-purple rounded-small py-3 text-white gap-[13px] sm:gap-5 mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
+    class="flex items-center w-full justify-between px-2 sm:px-[15px] cursor-pointer bg-vivid-purple rounded-small py-3 text-white gap-[13px] sm:gap-5 mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
   >
     <button @click="addCart(data, false)" class="w-4 h-4">
       <IconMinus class="[&_path]:fill-white" />
     </button>
-    <span class="text-[21px]/[28px] text-wgite font-sans font-bold">{{ data.count }} in Cart</span>
+    <span class="text-[15px] line-clamp-1 sm:text-[21px]/[28px] text-wgite font-sans font-bold"
+      >{{ data.count }} in Cart</span
+    >
     <button @click="addCart(data)" class="w-4 h-4">
       <IconPlus class="[&_path]:fill-white" />
     </button>

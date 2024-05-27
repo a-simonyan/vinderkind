@@ -19,7 +19,9 @@ export default {
         'light-lavender': '#b45bd6',
         'fire-red': '#D00C0C',
         silver: '#C9C9C9',
-        'pinkish-purple': '#D876FF'
+        'pinkish-purple': '#D876FF',
+        lilac: '#F7EAFC',
+        'pale-gray': '#F6F6F6'
       },
       borderRadius: {
         small: '5px'

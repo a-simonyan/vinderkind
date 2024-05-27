@@ -1,19 +1,24 @@
 <template>
   <div
-    class="bg-golden-yellow flex flex-col sm:flex-row relative h-[627px] min-[420px]:h-[700px] sm:h-[560px]"
+    class="flex flex-col sm:flex-row relative h-[627px] min-[420px]:h-[700px] sm:h-[571px] bg-golden-yellow sm:bg-transparent"
   >
     <div
-      class="hidden items-center justify-end lg:pr-32 relative z-[8] bg-golden-yellow rounded-r-[370px] w-[60%] sm:flex"
+      class="hidden items-center justify-end pl-4 lg:pr-32 relative z-[8] bg-golden-yellow rounded-r-[370px] w-[60%] sm:flex"
     >
-      <div>
-        <img src="../../assets/images/car.png" alt="car" />
+      <div class="flex flex-col items-center">
+        <div>
+          <img src="../../assets/images/car.png" alt="car" />
+        </div>
+        <h2 class="text-[55px]/[56px] text-vivid-purple font-hebrew font-bold max-w-[470px]">
+          חודש׳ליך געברעגנט צו אייער טיר
+        </h2>
       </div>
     </div>
-    <div class="absolute right-0 -top-[11px] h-[571px] hidden sm:block">
+    <div class="absolute right-0 h-[570px] top-[1px] hidden sm:block w-full">
       <img
         src="../../assets/images/home-footer.png"
         alt="home footer image"
-        class="h-full object-cover"
+        class="h-full object-cover w-full"
         draggable="false"
       />
     </div>

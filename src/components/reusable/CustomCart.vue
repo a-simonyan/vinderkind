@@ -1,6 +1,7 @@
 <template>
   <div
-    class="flex flex-col items-center rounded-small border border-vivid-purple px-[13px] pt-[7px] pb-[15px] max-w-[258px] w-full"
+    class="flex flex-col items-center rounded-small border border-vivid-purple px-2 sm:px-[13px] pt-[7px] pb-[15px] max-w-[209px] sm:max-w-[258px] w-full"
+    :class="customClass"
   >
     <div>
       <img :src="data.img" alt="" />
@@ -24,7 +25,8 @@ export default defineComponent({
     data: {
       type: Object,
       required: true
-    }
+    },
+    customClass: {}
   }
 })
 </script>

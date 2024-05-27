@@ -37,7 +37,8 @@
         </div>
       </div>
       <div class="hidden max-w-[590px] w-full justify-between lg:flex">
-        <button
+        <router-link
+          :to="link.link"
           v-for="(link, index) in links"
           :key="index"
           class="flex flex-col items-center justify-center group"
@@ -50,7 +51,7 @@
             class="text-light-purple text-[13px]/[15px] font-semibold group-hover:text-golden-yellow"
             >{{ link.subTitle }}</span
           >
-        </button>
+        </router-link>
       </div>
       <RouterLink to="/" class="max-w-[195px] sm:max-w-[289px] w-full relative">
         <img
@@ -63,13 +64,13 @@
     </div>
   </div>
   <div
-    class="fixed top-0 h-full z-10 bg-light-lavender lg:hidden transition-all ease-linear duration-500 w-full"
+    class="fixed top-0 h-full z-10 backdrop-blur-sm lg:hidden transition-all ease-linear duration-500 w-full"
     :class="{
       '-translate-x-full opacity-0': !showModal,
       'translate-x-0 opacity-100': showModal
     }"
   >
-    <MobileHeader :links="links" :toggle-modal="toggleModal" />
+    <MobileHeader :toggle-modal="toggleModal" />
   </div>
 </template>
 
@@ -85,10 +86,10 @@ export default {
   data() {
     return {
       links: [
-        { title: 'לאמיר רעדן', subTitle: 'Contact' },
-        { title: 'געצייג', subTitle: 'Accessories' },
-        { title: 'טעקעס', subTitle: 'Issues' },
-        { title: 'וואס איז וואונדערקינד', subTitle: 'About VinderKind' }
+        { title: 'לאמיר רעדן', subTitle: 'Contact', link: '/contact' },
+        { title: 'געצייג', subTitle: 'Accessories', link: '/accessories' },
+        { title: 'טעקעס', subTitle: 'Issues', link: '/Issues' },
+        { title: 'וואס איז וואונדערקינד', subTitle: 'About VinderKind', link: '' }
       ],
       showModal: false,
       isShaking: false
