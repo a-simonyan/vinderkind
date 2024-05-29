@@ -5,6 +5,7 @@ import PageLayout from '@/layouts/PageLayout.vue'
 import IssuesView from '@/views/IssuesView.vue'
 import AccessoriesView from '@/views/AccessoriesView.vue'
 import SignUpView from '@/views/SignUpView.vue'
+import ContactView from '@/views/ContactView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,10 @@ const router = createRouter({
         {
           path: '/sign-up',
           component: SignUpView
+        },
+        {
+          path: '/contact',
+          component: ContactView
         }
       ]
     }
