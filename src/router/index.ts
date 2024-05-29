@@ -7,6 +7,7 @@ import AccessoriesView from '@/views/AccessoriesView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import ContactView from '@/views/ContactView.vue'
 import SignInView from '@/views/SignInView.vue'
+import OrderConfirmationView from '@/views/OrderConfirmationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,10 @@ const router = createRouter({
         {
           path: '/sign-in',
           component: SignInView
+        },
+        {
+          path: '/order-confirmation',
+          component: OrderConfirmationView
         },
         {
           path: '/contact',

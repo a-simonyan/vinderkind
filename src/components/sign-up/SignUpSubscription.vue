@@ -187,9 +187,7 @@ export default defineComponent({
       return value === '00000' ? true : 'Please enter a valid ZIP code'
     }
 
-    function onSubmit(values: { [key: string]: any }) {
-      console.log(values)
-    }
+    function onSubmit(values: { [key: string]: any }) {}
 
     function emailValidation(value: string) {
       const emailRegex = /\S+@\S+\.\S+/
