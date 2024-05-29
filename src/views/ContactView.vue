@@ -16,9 +16,7 @@
       </h5>
     </div>
     <div>
-      <h5
-        class="text-vivid-purple text-lg lg:text-[30px]/[38px] font-bold font-hebrew text-end pb-1"
-      >
+      <h5 class="text-vivid-purple text-lg lg:text-3xl/[38px] font-bold font-hebrew text-end pb-1">
         ?וואס באקום איך אינעם וואונדערקינד
       </h5>
       <p class="text-base lg:text-[21px]/[30px] font-hebrew text-end font-light">
@@ -29,9 +27,7 @@
       </p>
     </div>
     <div class="pt-10">
-      <h5
-        class="text-vivid-purple text-lg lg:text-[30px]/[38px] font-bold font-hebrew text-end pb-1"
-      >
+      <h5 class="text-vivid-purple text-lg lg:text-3xl/[38px] font-bold font-hebrew text-end pb-1">
         ?וויפיל ‘וואונדערקינדער’ באקום איך מיטן זיך איינשרייבן
       </h5>
       <p class="text-base lg:text-[21px]/[30px] font-hebrew text-end font-light">

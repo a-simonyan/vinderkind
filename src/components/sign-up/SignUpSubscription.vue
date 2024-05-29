@@ -55,7 +55,7 @@
           <div class="flex flex-col items-center">
             <div class="flex items-center gap-1">
               <span class="text-[21px] font-medium">טעקע</span>
-              <span class="text-[30px] font-bold">${{ plans[choosePlan]?.preIssue }}</span>
+              <span class="text-3xl font-bold">${{ plans[choosePlan]?.preIssue }}</span>
             </div>
             <span class="text-[17px] font-hebrew"
               >באצאלט יערליך {{ plans[choosePlan]?.price }}</span
