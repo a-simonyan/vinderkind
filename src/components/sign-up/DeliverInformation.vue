@@ -4,13 +4,18 @@
       Delivery infomation
     </h5>
     <div class="flex flex-col gap-[17px]">
-      <div v-for="(field, index) in delivery" :key="index" class="w-full flex justify-center">
-        <CustomInput
-          :data="field"
+      <div
+        v-for="(field, index) in deliveryInfo"
+        :key="index"
+        class="w-full flex flex-col justify-center"
+      >
+        <Field
+          :name="field.field"
+          :rules="required"
           :placeholder="field.placeholder"
-          value="field.value"
-          v-model="field.value"
+          class="border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
         />
+        <span class="text-red-500 text-base pt-1">{{ errors && errors[field.field] }}</span>
       </div>
     </div>
     <button
@@ -21,34 +26,26 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import CustomInput from '@/components/reusable/CustomInput.vue'
+import { defineComponent } from 'vue'
 import IconPlus from '@/components/icons/IconPlus.vue'
+import { Field } from 'vee-validate'
 export default defineComponent({
-  components: { CustomInput, IconPlus },
+  components: { Field, IconPlus },
   props: {
     deliveryInfo: {
       type: Object,
       required: true
+    },
+    errors: {
+      type: Object
     }
   },
-  setup(props) {
-    const delivery = ref([
-      {
-        placeholder: 'Address',
-        value: props.deliveryInfo.address
-      },
-      {
-        placeholder: 'Address Line 2',
-        value: props.deliveryInfo.address2
-      },
-      {
-        placeholder: 'City, State, ZIP',
-        value: props.deliveryInfo.city
-      }
-    ])
+  setup() {
+    function required(value: any) {
+      return value ? true : 'This field is required'
+    }
     return {
-      delivery
+      required
     }
   }
 })

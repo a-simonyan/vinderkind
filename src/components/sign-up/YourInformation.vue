@@ -3,44 +3,47 @@
     Your information
   </h5>
   <div class="flex flex-col gap-[17px]">
-    <div v-for="(field, index) in fileds" :key="index" class="w-full flex justify-center">
-      <CustomInput
-        :data="field"
+    <div
+      v-for="(field, index) in yourInfo"
+      :key="index"
+      class="w-full flex flex-col justify-center"
+    >
+      <Field
+        :name="field.field"
+        :rules="[required, field.valid]"
         :placeholder="field.placeholder"
-        value="field.value"
-        v-model="field.value"
+        class="border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
       />
+      <span class="text-red-500 text-base pt-1">{{ errors[field.field] }}</span>
     </div>
     <PhoneInput :phone="yourInfo.phone" />
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import CustomInput from '@/components/reusable/CustomInput.vue'
+import { defineComponent } from 'vue'
 import PhoneInput from '@/components/reusable/PhoneInput.vue'
+import { Field } from 'vee-validate'
 export default defineComponent({
-  components: { CustomInput, PhoneInput },
+  components: { PhoneInput, Field },
   props: {
     yourInfo: {
       type: Object,
       required: true
+    },
+    errors: {
+      type: Object,
+      required: true
     }
   },
-  setup(props) {
-    const fileds = ref([
-      {
-        placeholder: 'Full name',
-        value: props.yourInfo.name,
-        error: 'Full name is required '
-      },
-      {
-        placeholder: 'Email',
-        value: props.yourInfo.email,
-        error: 'Email is required'
-      }
-    ])
+  setup() {
+    function required(
+      value: string | number | boolean | null | undefined | Array<any> | Record<string, any>
+    ) {
+      return value ? true : 'This field is required'
+    }
+
     return {
-      fileds
+      required
     }
   }
 })
