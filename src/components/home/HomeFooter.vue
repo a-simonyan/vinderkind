@@ -7,7 +7,7 @@
     >
       <div class="flex flex-col items-center">
         <div>
-          <img src="../../assets/images/car.png" alt="car" />
+          <img src="../../assets/images/car.png" alt="car" draggable="false" />
         </div>
         <h2 class="text-[55px]/[56px] text-vivid-purple font-hebrew font-bold max-w-[470px]">
           חודש׳ליך געברעגנט צו אייער טיר

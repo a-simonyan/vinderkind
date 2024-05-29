@@ -3,7 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import CartView from '../views/CartView.vue'
 import PageLayout from '@/layouts/PageLayout.vue'
 import IssuesView from '@/views/IssuesView.vue'
-import AccesoriesView from '@/views/AccesoriesView.vue'
+import AccessoriesView from '@/views/AccessoriesView.vue'
+import SignUpView from '@/views/SignUpView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,7 +27,11 @@ const router = createRouter({
         },
         {
           path: '/accessories',
-          component: AccesoriesView
+          component: AccessoriesView
+        },
+        {
+          path: '/sign-up',
+          component: SignUpView
         }
       ]
     }

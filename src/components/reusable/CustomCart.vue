@@ -4,7 +4,7 @@
     :class="customClass"
   >
     <div>
-      <img :src="data.img" alt="" />
+      <img :src="data.img" alt="cart" draggable="false" />
     </div>
     <span
       class="text-[15px]/[16px] sm:text-lg/[23px] font-medium sm:font-bold text-vivid-purple font-hebrew mt-[10px] block"

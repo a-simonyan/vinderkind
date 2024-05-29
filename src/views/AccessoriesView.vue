@@ -1,23 +1,23 @@
 <template>
-  <ContentWithPaginate :page="page" :data="allIssues" />
+  <ContentWithPaginate :page="page" :data="accessories" />
 </template>
 <script lang="ts">
 import ContentWithPaginate from '@/components/reusable/ContentWithPaginate.vue'
-import { useIssuesStore } from '@/stores/issues'
+import { useAccessoriesStore } from '@/stores/accessories'
 import { defineComponent } from 'vue'
 export default defineComponent({
   components: { ContentWithPaginate },
   setup() {
-    const { allIssues } = useIssuesStore()
+    const { accessories } = useAccessoriesStore()
     return {
-      allIssues
+      accessories
     }
   },
   data() {
     return {
       page: {
-        title: 'טעקעס',
-        enTitle: 'Issues'
+        title: 'געצייג',
+        enTitle: 'Accessories'
       }
     }
   }

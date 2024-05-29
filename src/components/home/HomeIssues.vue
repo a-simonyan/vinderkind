@@ -15,12 +15,13 @@
         </template>
       </SharedSwiper>
     </div>
-    <button
+    <router-link
+      to="/issues"
       class="bg-vivid-purple rounded-small flex flex-col justify-center items-center px-[35px] pt-[6px] pb-[10px] hover:opacity-80 transition-all ease-linear duration-150"
     >
       <span class="text-lg/[23px] text-white font-hebrew font-bold">ווייז אלע</span>
       <span class="text-[13px]/[15px] font-extrabold text-pinkish-purple">Show All</span>
-    </button>
+    </router-link>
   </div>
 </template>
 <script lang="ts">

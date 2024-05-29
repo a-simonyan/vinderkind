@@ -5,7 +5,7 @@
       :class="currentPage > 1 ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
       class="flex items-center"
     >
-      <img src="../../assets/images/arrow.png" alt="arrow" class="w-6 h-6" />
+      <img src="../../assets/images/arrow.png" alt="arrow" class="w-6 h-6" draggable="false" />
     </router-link>
     <div class="flex gap-[17px]">
       <router-link
@@ -27,7 +27,12 @@
       :class="currentPage < totalPages ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
       class="flex items-center"
     >
-      <img src="../../assets/images/arrow.png" alt="arrow" class="w-6 h-6 rotate-180" />
+      <img
+        src="../../assets/images/arrow.png"
+        alt="arrow"
+        class="w-6 h-6 rotate-180"
+        draggable="false"
+      />
     </router-link>
   </div>
 </template>
