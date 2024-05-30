@@ -18,7 +18,7 @@
         placeholder="Email address or phone number"
       />
 
-      <span class="text-lg text-red-500">{{ errors.field }}</span>
+      <span class="text-xs text-red-500">{{ errors.field }}</span>
 
       <button
         class="mt-[18px] bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"

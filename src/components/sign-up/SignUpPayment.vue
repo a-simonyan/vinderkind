@@ -25,14 +25,12 @@
           />
         </div>
       </div>
-      <TotalPayment />
     </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import TotalPayment from '@/components/sign-up/TotalPayment.vue'
 export default defineComponent({
-  components: { TotalPayment }
+  components: {}
 })
 </script>

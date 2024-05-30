@@ -20,11 +20,12 @@
         <span>${{ tax }}</span>
       </div>
     </div>
-    <button
-      class="bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
+    <router-link
+      to="/checkout"
+      class="flex justify-center bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
     >
       Checkout ${{ (shipping + tax + calculateTotal()).toFixed(2) }}
-    </button>
+    </router-link>
   </div>
   <div v-else>
     <p class="text-xl font-bold text-center">Your cart is empty.</p>
