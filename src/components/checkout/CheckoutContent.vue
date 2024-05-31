@@ -10,8 +10,9 @@
         <div class="pt-6 pb-[31px] border-b border-b-light-gray">
           <SharedCheckBox label="Sign up for Vinderkind emails" v-model="renewYear" />
         </div>
-        <DeliverInformation :deliveryInfo="deliveryInfo" :errors="errors" :checkout="true" />
-        <!-- <PaymentInformation /> -->
+        <DeliverInformation :deliveryInfo="deliveryInfo" :errors="errors" />
+        <GiftInformation :errors="errors" :index="0" />
+        <PaymentInformation :errors="errors" :paymentInfo="paymentInfo" />
         <button
           class="mt-[15px] mb-[18px] bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
         >
@@ -19,32 +20,57 @@
         </button>
         <div class="text-[13px]/[17px] flex justify-center gap-1">
           <span class="text-center">By continuing you agree with our</span>
-          <router-link to="/terms" class="text-center text-vivid-purple">
+          <button @click.prevent="openModal" class="text-center text-vivid-purple">
             terms and conditions.
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
   </CustomForm>
+  <SharedModal v-model="open">
+    <TermsConditions @close="closeModal" />
+  </SharedModal>
 </template>
 
 <script lang="ts">
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import YourInformation from '@/components/sign-up/YourInformation.vue'
 import DeliverInformation from '@/components/sign-up/DeliverInformation.vue'
+import GiftInformation from '@/components/sign-up/GiftInformation.vue'
+import PaymentInformation from '@/components/sign-up/PaymentInformation.vue'
 import { computed, defineComponent, ref } from 'vue'
 import { usePlansStore } from '@/stores/plans'
 import { Form as CustomForm } from 'vee-validate'
+import SharedModal from '@/components/reusable/SharedModal.vue'
+import TermsConditions from '@/components/sign-up/TermsConditions.vue'
 
 export default defineComponent({
   components: {
     SharedCheckBox,
     YourInformation,
     DeliverInformation,
-    CustomForm
+    CustomForm,
+    GiftInformation,
+    PaymentInformation,
+    SharedModal,
+    TermsConditions
   },
   data() {
     return {
+      paymentInfo: [
+        {
+          placeholder: 'Expiration Date',
+          field: 'expDate'
+        },
+        {
+          placeholder: 'CVV',
+          field: 'cvv'
+        },
+        {
+          placeholder: 'Billing ZIP Code',
+          field: 'billing'
+        }
+      ],
       yourInfo: [
         {
           placeholder: 'Full name',
@@ -102,6 +128,13 @@ export default defineComponent({
     const showIconCheck = computed(() => {
       return zipCode.value === '00000'
     })
+    const open = ref(false)
+    const openModal = () => {
+      open.value = true
+    }
+    const closeModal = () => {
+      open.value = false
+    }
     return {
       validZips,
       publication,
@@ -113,7 +146,10 @@ export default defineComponent({
       zipValidation,
       emailValidation,
       showIconCheck,
-      zipCode
+      zipCode,
+      open,
+      openModal,
+      closeModal
     }
   }
 })

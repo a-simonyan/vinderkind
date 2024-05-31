@@ -4,14 +4,13 @@
   </div>
   <div v-if="checked" class="flex flex-col gap-[17px] mt-4">
     <div class="w-full relative">
-      <Field
+      <CustomField
         :name="'recipients' + '-' + index"
         :rules="required"
         placeholder="Recipients Name "
-        class="w-full border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
       />
       <span class="text-red-500 text-xs pt-1 absolute bottom-[-18px] left-0">{{
-        errors.recipients
+        errors['recipients' + '-' + index]
       }}</span>
     </div>
     <div class="flex flex-col relative">
@@ -24,7 +23,9 @@
         rows="5"
         class="border border-charcoal rounded-small w-full text-xl placeholder:text-silver px-[21px] pt-4 pb-[13px]"
       />
-      <span class="text-red-500 text-xs pt-1 absolute bottom-[-18px]">{{ errors.giftNote }}</span>
+      <span class="text-red-500 text-xs pt-1 absolute bottom-[-18px]">{{
+        errors['giftNote' + '-' + index]
+      }}</span>
     </div>
   </div>
 </template>
@@ -33,8 +34,9 @@
 import { defineComponent, ref } from 'vue'
 import { Field } from 'vee-validate'
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
+import CustomField from '@/components/reusable/CustomField.vue'
 export default defineComponent({
-  components: { Field, SharedCheckBox },
+  components: { Field, SharedCheckBox, CustomField },
   props: {
     errors: {
       type: Object,

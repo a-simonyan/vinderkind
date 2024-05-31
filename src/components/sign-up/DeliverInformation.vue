@@ -18,18 +18,14 @@
         <span class="text-red-500 text-xs pt-1">{{ errors && errors[field.field] }}</span>
       </div>
     </div>
-    <div v-if="checkout" class="pt-[23px]">
-      <SharedCheckBox label="It’s a Gift" />
-    </div>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
 
-import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import CustomField from '@/components/reusable/CustomField.vue'
 export default defineComponent({
-  components: { SharedCheckBox, CustomField },
+  components: { CustomField },
   props: {
     deliveryInfo: {
       type: Object,
@@ -37,9 +33,6 @@ export default defineComponent({
     },
     errors: {
       type: Object
-    },
-    checkout: {
-      type: Boolean
     }
   },
   setup() {

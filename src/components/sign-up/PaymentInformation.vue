@@ -18,7 +18,7 @@
     <button @click.prevent="" class="absolute top-[14px] right-4 text-lg text-vivid-purple">
       Apply
     </button>
-    <span class="text-sm pt-1 text-red-500">{{ errors?.promocode }}</span>
+    <span class="text-sm pt-1 text-red-500">{{ errors.promocode }}</span>
   </div>
   <h5 class="text-[19px]/[22px] sm:text-[27px]/[31px] font-semibold mt-[17px] mb-[13px]">
     Payment infomation
@@ -28,29 +28,31 @@
     <span class="text-red-500 text-xs pt-1">{{ errors.cart }}</span>
   </div>
   <div
-    class="mt-[17px] h-[53px] grid grid-cols-3 border border-charcoal justify-between rounded-small px-5 pt-4 pb-[13px] w-full text-xl/6 placeholder:text-silver focus:outline-vivid-purple"
+    class="mt-[17px] h-[49px] sm:h-[53px] flex gap-1 sm:grid grid-cols-3 border border-charcoal justify-between rounded-small px-5 pt-4 pb-[13px] w-full text-xl/6 placeholder:text-silver focus:outline-vivid-purple"
   >
     <div
       v-for="(field, index) in paymentInfo"
       :key="index"
-      class="w-full flex flex-col justify-center relative"
+      class="w-max sm:w-full flex flex-col justify-center relative"
     >
       <div>
         <Field
           :name="field.field"
           :rules="[required]"
           :placeholder="field.placeholder"
-          class="text-xl placeholder:text-silver focus:outline-none h-full w-full"
+          class="text-base sm:text-xl placeholder:text-silver focus:outline-none h-full w-full"
           @blur="focusField"
           @focus="focusField"
         />
         <span
           :class="isFocused ? 'opacity-100 z-[1]' : ' opacity-0 z-0'"
-          class="absolute bg-white -top-[23px] left-0 px-1 transition-all duration-75 ease-linear text-sm"
+          class="absolute bg-white -top-[23px] left-0 px-1 transition-all duration-75 ease-linear text-sm whitespace-nowrap"
           >{{ field.placeholder }}</span
         >
       </div>
-      <span class="text-red-500 text-xs pt-1 absolute -bottom-8">{{ errors[field.field] }}</span>
+      <span class="text-red-500 text-xs pt-1 absolute -bottom-8 whitespace-nowrap">{{
+        errors[field.field] ?? 'Field is required'
+      }}</span>
     </div>
   </div>
   <div class="flex flex-col justify-between bg-lavender rounded-small py-[14px] px-[22px] mt-6">

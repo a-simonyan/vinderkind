@@ -6,7 +6,7 @@
         <Field
           :name="'zip' + '-' + index"
           :rules="required"
-          class="w-full border rounded-small shadow-gray pt-4 pb-[13px] px-[18px] text-xl border-black placeholder:text-silver"
+          class="w-full border rounded-small shadow-gray pt-4 pb-[13px] px-[18px] h-[49px] sm:h-[53px] text-[19px] sm:text-xl border-black placeholder:text-silver"
           placeholder="Delivery ZIP Code"
           :model-value="zipCode"
           @input="
@@ -23,8 +23,10 @@
           >Delivery ZIP Code</span
         >
       </div>
-      <span class="text-red-500 text-xs pt-1 block absolute">{{ errors.zip }}</span>
-      <IconCheck v-if="checkZip" class="absolute top-5 right-[22px]" />
+      <span class="text-red-500 text-xs pt-1 block absolute">{{
+        errors['zip' + '-' + index]
+      }}</span>
+      <IconCheck v-if="checkZip" class="absolute top-4 sm:top-5 right-[22px] w-4 sm:w-max" />
     </div>
   </div>
 </template>

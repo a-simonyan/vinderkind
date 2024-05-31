@@ -3,7 +3,7 @@
     <Field
       :name="name"
       :rules="rules"
-      class="w-full border rounded-small shadow-gray pt-4 pb-[13px] px-[18px] text-xl border-charcoal placeholder:text-silver h-[53px]"
+      class="w-full border rounded-small shadow-gray pt-4 pb-[13px] px-[18px] text-base sm:text-xl border-charcoal placeholder:text-silver h-[49px] sm:h-[53px]"
       :placeholder="placeholder"
       @focus="focusField"
       @bind="focusField"
