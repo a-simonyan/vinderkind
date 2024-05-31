@@ -21,12 +21,14 @@
             >{{ link.subTitle }}</span
           >
         </router-link>
-        <button
+        <router-link
+          @click="toggleModal()"
+          to="/sign-up"
           class="self-center bg-golden-yellow max-w-[132px] w-full py-1 flex-col items-center rounded-small px-[22px] [&_span]:text-vivid-purple flex hover:bg-lavender transition-all duration-300 ease-in"
         >
           <span class="text-[17px]/[22px] font-bold font-hebrew">סובסקרייבט</span>
           <span class="text-[13px]/[15px] font-extrabold">Subscribe</span>
-        </button>
+        </router-link>
       </div>
     </div>
   </div>

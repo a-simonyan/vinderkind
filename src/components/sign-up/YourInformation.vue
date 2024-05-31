@@ -8,15 +8,12 @@
       :key="index"
       class="w-full flex flex-col justify-center relative"
     >
-      <Field
+      <CustomField
         :name="field.field"
         :rules="[required, field.valid]"
         :placeholder="field.placeholder"
-        class="border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
       />
-      <span class="text-red-500 text-xs pt-1 absolute bottom-[-18px]">{{
-        errors[field.field]
-      }}</span>
+      <span class="text-red-500 text-xs pt-1">{{ errors[field.field] }}</span>
     </div>
     <PhoneInput :phone="yourInfo.phone" />
   </div>
@@ -24,9 +21,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import PhoneInput from '@/components/reusable/PhoneInput.vue'
-import { Field } from 'vee-validate'
+import CustomField from '@/components/reusable/CustomField.vue'
 export default defineComponent({
-  components: { PhoneInput, Field },
+  components: { PhoneInput, CustomField },
   props: {
     yourInfo: {
       type: Object,

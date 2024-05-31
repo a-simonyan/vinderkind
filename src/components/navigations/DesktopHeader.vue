@@ -2,12 +2,13 @@
   <div class="font-raleway sticky top-0 bg-vivid-purple flex justify-center z-10">
     <div class="py-7 px-[23px] pr-4 flex justify-between container lg:py-5 lg:px-6 relative">
       <div class="flex gap-5 items-center">
-        <button
+        <router-link
+          to="/sign-up"
           class="bg-golden-yellow max-w-[132px] w-full py-1 flex-col items-center rounded-small px-[22px] [&_span]:text-vivid-purple hidden lg:flex hover:bg-lavender transition-all duration-300 ease-in"
         >
           <span class="text-[17px]/[22px] font-bold font-hebrew">סובסקרייבט</span>
           <span class="text-[13px]/[15px] font-extrabold">Subscribe</span>
-        </button>
+        </router-link>
         <button class="block lg:hidden" @click="toggleModal">
           <IconBurger />
         </button>

@@ -9,15 +9,13 @@
         :key="index"
         class="w-full flex flex-col justify-center relative"
       >
-        <Field
+        <CustomField
           :name="field.field"
           :rules="!field.field.includes('address2') ? required : []"
           :placeholder="field.placeholder"
-          class="border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
         />
-        <span class="text-red-500 text-xs pt-1 absolute bottom-[-18px]">{{
-          errors && errors[field.field]
-        }}</span>
+
+        <span class="text-red-500 text-xs pt-1">{{ errors && errors[field.field] }}</span>
       </div>
     </div>
     <div v-if="checkout" class="pt-[23px]">
@@ -29,9 +27,9 @@
 import { defineComponent } from 'vue'
 
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
-import { Field } from 'vee-validate'
+import CustomField from '@/components/reusable/CustomField.vue'
 export default defineComponent({
-  components: { Field, SharedCheckBox },
+  components: { SharedCheckBox, CustomField },
   props: {
     deliveryInfo: {
       type: Object,

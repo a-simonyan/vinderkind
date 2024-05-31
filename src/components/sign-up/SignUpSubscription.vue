@@ -1,7 +1,7 @@
 <template>
   <CustomForm v-slot="{ errors }" @submit="onSubmit" class="w-full lg:w-1/2">
     <div
-      class="w-full pt-10 sm:pt-[46px] sm:pb-10 pl-10 pr-[23px] sm:pr-[54px] rounded-small bg-white lg:rounded-none -mt-1 lg:mt-0"
+      class="w-full pt-10 sm:pt-[46px] sm:pb-10 px-[23px] sm:pr-[54px] rounded-small bg-white lg:rounded-none -mt-1 lg:mt-0"
     >
       <h5 class="text-xl/[27px] sm:text-[22px]/[26px] font-bold sm:font-semibold">
         Sign up for a Vinderkind Subscription
@@ -13,9 +13,10 @@
           :subscribtion="item"
           :index="index"
           :allsubscription="subscription"
+          @enableSection="enableSection"
         />
       </div>
-      <div>
+      <div :class="isEnabled ? 'opacity-100' : 'opacity-50 pointer-events-none'">
         <AccesoriesInformation />
         <PaymentInformation :errors="errors" :paymentInfo="paymentInfo" />
         <button
@@ -25,13 +26,16 @@
         </button>
         <div class="text-[13px]/[17px] flex flex-col">
           <span class="text-center">By clicking on the subscribe button, you agree with our </span>
-          <router-link to="/terms" class="text-center text-vivid-purple">
+          <button @click.prevent="openModal" class="text-center text-vivid-purple">
             terms and conditions & cancelation policy.
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
   </CustomForm>
+  <SharedModal v-model="open">
+    <TermsConditions @close="closeModal" />
+  </SharedModal>
 </template>
 
 <script lang="ts">
@@ -41,13 +45,16 @@ import { defineComponent, ref } from 'vue'
 import SubscriptionSection from '@/components/sign-up/SubscriptionSection.vue'
 import { usePlansStore } from '@/stores/plans'
 import { Form as CustomForm } from 'vee-validate'
-
+import SharedModal from '@/components/reusable/SharedModal.vue'
+import TermsConditions from '@/components/sign-up/TermsConditions.vue'
 export default defineComponent({
   components: {
     PaymentInformation,
     AccesoriesInformation,
     CustomForm,
-    SubscriptionSection
+    SubscriptionSection,
+    SharedModal,
+    TermsConditions
   },
   data() {
     return {
@@ -64,16 +71,27 @@ export default defineComponent({
           placeholder: 'Billing ZIP Code',
           field: 'billing'
         }
-      ]
+      ],
+      isEnabled: false
     }
   },
   methods: {
     updateSubscriptionZipCode(index: number, value: string) {
       this.subscription[index].zipCode = value
+    },
+    enableSection(value: boolean) {
+      this.isEnabled = value
     }
   },
 
   setup() {
+    const open = ref(false)
+    const openModal = () => {
+      open.value = true
+    }
+    const closeModal = () => {
+      open.value = false
+    }
     const { publication } = usePlansStore()
     let subscription = ref([{ zipCode: '' }])
     function addSubscripbtion() {
@@ -88,7 +106,10 @@ export default defineComponent({
       subscription,
       publication,
       onSubmit,
-      addSubscripbtion
+      addSubscripbtion,
+      open,
+      openModal,
+      closeModal
     }
   }
 })

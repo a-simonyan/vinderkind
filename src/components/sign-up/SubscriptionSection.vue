@@ -14,6 +14,7 @@
       @update:modelValue="updateZipCode"
       :index="index"
       :checkZip="dataZip?.status"
+      @updateZipCode="updateZipCode"
     />
     <span v-if="dataZip?.err" class="text-red-500 text-xs"
       >We currently don’t deliver to this zip code. Please check back in the coming months.</span
@@ -122,9 +123,11 @@ export default defineComponent({
       if (value.length === 5) {
         fetchData(`zip/${value}`).then((res) => {
           this.dataZip = res
+          this.$emit('enableSection', true)
         })
       } else {
         this.dataZip = []
+        this.$emit('enableSection', false)
       }
     },
     removeSubscripion() {

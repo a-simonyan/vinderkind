@@ -9,13 +9,13 @@
       <div class="flex w-full absolute -top-6 justify-center">
         <div
           v-if="dataZip"
-          class="max-w-[282px] sm:max-w-[308px] w-full bg-vivid-purple rounded-[32px] px-[9px] py-[6px] flex"
+          class="max-w-[282px] sm:max-w-[308px] w-full bg-vivid-purple rounded-[32px] px-[9px] py-[6px] flex flex-row-reverse"
         >
           <button
             v-for="(plan, index) in dataZip"
             :key="index"
             class="w-full flex justify-center items-center gap-2 py-[6px] transition-all ease-linear duration-200"
-            :class="choosePlan === index ? 'bg-white text-black rounded-[32px]' : 'text-white'"
+            :class="choosePlan == index ? 'bg-white text-black rounded-[32px]' : 'text-white'"
             @click.prevent="updateChoosePlan(index)"
           >
             <span v-if="plan?.save" class="text-xs/[14px] font-bold">Save {{ plan?.save }}</span>
@@ -26,10 +26,12 @@
       <div class="flex flex-col items-center">
         <div class="flex items-center gap-1">
           <span class="text-[21px] font-medium">טעקע</span>
-          <span class="text-3xl font-bold">${{ dataZip ? dataZip[choosePlan]?.amount : 0.0 }}</span>
+          <span class="text-3xl font-bold"
+            >${{ dataZip ? dataZip[choosePlan]?.perIssue : 0.0 }}</span
+          >
         </div>
         <span class="text-[17px] font-hebrew"
-          >באצאלט יערליך {{ dataZip ? dataZip[choosePlan]?.amount : 0.0 }}</span
+          >באצאלט יערליך ${{ dataZip ? dataZip[choosePlan]?.amount : 0.0 }}</span
         >
       </div>
     </div>

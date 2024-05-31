@@ -13,28 +13,19 @@
       :class="!isDivVisible ? 'rotete-180' : '-rotate-180'"
     />
   </button>
-  <div class="flex flex-col mt-[17px]">
-    <Field
-      v-if="isDivVisible"
-      name="promocode"
-      :rules="[required]"
-      placeholder="Promo Code"
-      class="border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
-    />
-
+  <div v-if="isDivVisible" class="flex flex-col mt-[17px] relative">
+    <CustomField name="promocode" :rules="[required]" placeholder="Promo Code" />
+    <button @click.prevent="" class="absolute top-[14px] right-4 text-lg text-vivid-purple">
+      Apply
+    </button>
     <span class="text-sm pt-1 text-red-500">{{ errors?.promocode }}</span>
   </div>
   <h5 class="text-[19px]/[22px] sm:text-[27px]/[31px] font-semibold mt-[17px] mb-[13px]">
     Payment infomation
   </h5>
   <div class="flex flex-col relative">
-    <Field
-      name="cart"
-      :rules="[required]"
-      placeholder="Name on card"
-      class="border border-charcoal rounded-small px-[21px] pt-4 pb-[13px] text-xl placeholder:text-silver h-[53px] focus:border-vivid-purple"
-    />
-    <span class="text-red-500 text-xs pt-1 absolute bottom-[-18px]">{{ errors.cart }}</span>
+    <CustomField name="cart" :rules="[required]" placeholder="Name on card" />
+    <span class="text-red-500 text-xs pt-1">{{ errors.cart }}</span>
   </div>
   <div
     class="mt-[17px] h-[53px] grid grid-cols-3 border border-charcoal justify-between rounded-small px-5 pt-4 pb-[13px] w-full text-xl/6 placeholder:text-silver focus:outline-vivid-purple"
@@ -44,15 +35,22 @@
       :key="index"
       class="w-full flex flex-col justify-center relative"
     >
-      <Field
-        :name="field.field"
-        :rules="[required]"
-        :placeholder="field.placeholder"
-        class="text-xl placeholder:text-silver focus:outline-none h-full"
-      />
-      <span class="text-red-500 text-xs pt-1 absolute bottom-[-30px]">{{
-        errors[field.field]
-      }}</span>
+      <div>
+        <Field
+          :name="field.field"
+          :rules="[required]"
+          :placeholder="field.placeholder"
+          class="text-xl placeholder:text-silver focus:outline-none h-full w-full"
+          @blur="focusField"
+          @focus="focusField"
+        />
+        <span
+          :class="isFocused ? 'opacity-100 z-[1]' : ' opacity-0 z-0'"
+          class="absolute bg-white -top-[23px] left-0 px-1 transition-all duration-75 ease-linear text-sm"
+          >{{ field.placeholder }}</span
+        >
+      </div>
+      <span class="text-red-500 text-xs pt-1 absolute -bottom-8">{{ errors[field.field] }}</span>
     </div>
   </div>
   <div class="flex flex-col justify-between bg-lavender rounded-small py-[14px] px-[22px] mt-6">
@@ -78,8 +76,9 @@
 import { defineComponent, ref } from 'vue'
 import IconCoupon from '@/components/icons/IconCoupon.vue'
 import { Field } from 'vee-validate'
+import CustomField from '@/components/reusable/CustomField.vue'
 export default defineComponent({
-  components: { IconCoupon, Field },
+  components: { IconCoupon, Field, CustomField },
   data() {
     return {
       expiryDate: '',
@@ -121,12 +120,20 @@ export default defineComponent({
     function toggleViewMore() {
       viewMore.value = !viewMore.value
     }
+    const isFocused = ref(false)
+
+    function focusField() {
+      isFocused.value = true
+    }
+
     return {
       isDivVisible,
       toggleDivVisibility,
       required,
       viewMore,
-      toggleViewMore
+      toggleViewMore,
+      focusField,
+      isFocused
     }
   }
 })
