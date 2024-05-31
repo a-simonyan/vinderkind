@@ -34,7 +34,7 @@
               >
                 <div class="relative">
                   <slot></slot>
-                  <button @click="handleCloseModal" class="absolute top-[22px] right-6">
+                  <button @click.prevent="handleCloseModal" class="absolute top-[22px] right-6">
                     <IconClose class="[&_path]:fill-black w-[18px] h-[18px]" />
                   </button>
                 </div>
