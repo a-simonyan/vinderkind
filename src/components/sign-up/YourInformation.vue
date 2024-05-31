@@ -22,6 +22,7 @@
 import { defineComponent } from 'vue'
 import PhoneInput from '@/components/reusable/PhoneInput.vue'
 import CustomField from '@/components/reusable/CustomField.vue'
+import { required } from '@/utills/helpers/validation'
 export default defineComponent({
   components: { PhoneInput, CustomField },
   props: {
@@ -35,10 +36,6 @@ export default defineComponent({
     }
   },
   setup() {
-    function required(value: unknown): boolean | string {
-      return value ? true : 'This field is required'
-    }
-
     return {
       required
     }

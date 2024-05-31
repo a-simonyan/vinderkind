@@ -38,11 +38,13 @@ import YourInformation from '@/components/sign-up/YourInformation.vue'
 import DeliverInformation from '@/components/sign-up/DeliverInformation.vue'
 import GiftInformation from '@/components/sign-up/GiftInformation.vue'
 import PaymentInformation from '@/components/sign-up/PaymentInformation.vue'
-import { computed, defineComponent, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { usePlansStore } from '@/stores/plans'
 import { Form as CustomForm } from 'vee-validate'
 import SharedModal from '@/components/reusable/SharedModal.vue'
 import TermsConditions from '@/components/sign-up/TermsConditions.vue'
+import { useRouter } from 'vue-router'
+import { emailValidation } from '@/utills/helpers/validation'
 
 export default defineComponent({
   components: {
@@ -101,6 +103,7 @@ export default defineComponent({
   },
 
   setup() {
+    const router = useRouter()
     let zipCode = ref('')
     const { publication } = usePlansStore()
     let choosePlan = ref(1)
@@ -115,19 +118,13 @@ export default defineComponent({
       return value === '00000' ? true : 'Please enter a valid ZIP code'
     }
 
-    function onSubmit(values: { [key: string]: any }) {}
-
-    function emailValidation(value: string) {
-      const emailRegex = /\S+@\S+\.\S+/
-      return emailRegex.test(value) ? true : 'Invalid email format'
+    function onSubmit() {
+      router.push('/order-confirmation')
     }
 
     const updateChoosePlan = (planId: number) => {
       choosePlan.value = planId
     }
-    const showIconCheck = computed(() => {
-      return zipCode.value === '00000'
-    })
     const open = ref(false)
     const openModal = () => {
       open.value = true
@@ -145,7 +142,6 @@ export default defineComponent({
       onSubmit,
       zipValidation,
       emailValidation,
-      showIconCheck,
       zipCode,
       open,
       openModal,

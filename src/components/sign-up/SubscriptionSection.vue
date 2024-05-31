@@ -54,6 +54,8 @@ import DeliverInformation from '@/components/sign-up/DeliverInformation.vue'
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import IconPlus from '@/components/icons/IconPlus.vue'
 import { usePlansStore } from '@/stores/plans'
+import { required } from '@/utills/helpers/validation'
+import { emailValidation } from '@/utills/helpers/validation'
 import { fetchData } from '@/api/query'
 export default defineComponent({
   components: {
@@ -140,13 +142,6 @@ export default defineComponent({
     const { publication } = usePlansStore()
     const updateChoosePlan = (planId: string) => {
       choosePlan.value = planId
-    }
-    function emailValidation(value: string) {
-      const emailRegex = /\S+@\S+\.\S+/
-      return emailRegex.test(value) ? true : 'Invalid email format'
-    }
-    function required(value: unknown): boolean | string {
-      return value ? true : 'This field is required'
     }
 
     return {

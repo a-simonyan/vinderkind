@@ -35,6 +35,7 @@ import { defineComponent, ref } from 'vue'
 import { Field } from 'vee-validate'
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import CustomField from '@/components/reusable/CustomField.vue'
+import { required } from '@/utills/helpers/validation'
 export default defineComponent({
   components: { Field, SharedCheckBox, CustomField },
   props: {
@@ -48,10 +49,6 @@ export default defineComponent({
     }
   },
   setup() {
-    function required(value: unknown): boolean | string {
-      return value ? true : 'This field is required'
-    }
-
     return {
       required,
       checked: ref(false)

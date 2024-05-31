@@ -51,7 +51,7 @@
         >
       </div>
       <span class="text-red-500 text-xs pt-1 absolute -bottom-8 whitespace-nowrap">{{
-        errors[field.field] ?? 'Field is required'
+        errors[field.field] ? 'Field is required' : ''
       }}</span>
     </div>
   </div>
@@ -79,6 +79,7 @@ import { defineComponent, ref } from 'vue'
 import IconCoupon from '@/components/icons/IconCoupon.vue'
 import { Field } from 'vee-validate'
 import CustomField from '@/components/reusable/CustomField.vue'
+import { required } from '@/utills/helpers/validation'
 export default defineComponent({
   components: { IconCoupon, Field, CustomField },
   data() {
@@ -116,9 +117,7 @@ export default defineComponent({
     function toggleDivVisibility() {
       isDivVisible.value = !isDivVisible.value
     }
-    function required(value: unknown): boolean | string {
-      return !!value || 'This field is required'
-    }
+
     function toggleViewMore() {
       viewMore.value = !viewMore.value
     }

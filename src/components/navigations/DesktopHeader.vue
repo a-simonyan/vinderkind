@@ -13,7 +13,7 @@
           <IconBurger />
         </button>
         <div class="flex gap-[11px] items-center h-max">
-          <RouterLink
+          <router-link
             to="/cart"
             class="group relative shake_div"
             :class="{
@@ -29,12 +29,12 @@
             <IconBasket
               class="group-hover:[&_path]:stroke-lavender [&_path]:transition-all [&_path]:ease-linear [&_path]:duration-300"
             />
-          </RouterLink>
-          <button class="hidden group lg:block">
+          </router-link>
+          <router-link to="/sign-in" class="hidden group lg:block">
             <IconUser
               class="group-hover:[&_path]:stroke-lavender [&_path]:transition-all [&_path]:ease-linear [&_path]:duration-300"
             />
-          </button>
+          </router-link>
         </div>
       </div>
       <div class="hidden max-w-[590px] w-full justify-between lg:flex">
@@ -54,14 +54,14 @@
           >
         </router-link>
       </div>
-      <RouterLink to="/" class="max-w-[195px] sm:max-w-[289px] w-full relative">
+      <router-link to="/" class="max-w-[195px] sm:max-w-[289px] w-full relative">
         <img
           src="../../assets/footer_logo.png"
           draggable="false"
           alt="logo"
           class="absolute -top-2"
         />
-      </RouterLink>
+      </router-link>
     </div>
   </div>
   <div

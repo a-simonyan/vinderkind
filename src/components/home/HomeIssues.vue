@@ -11,7 +11,7 @@
     <div class="max-w-[1100px] w-full pl-0 pr-[23px] sm:px-5 xl:px-0">
       <SharedSwiper :data="lastIssues" :points="points">
         <template #default="{ index, content }">
-          <CustomCart :data="content" :key="index" />
+          <CustomCart :data="content" :key="index" :preview="true" />
         </template>
       </SharedSwiper>
     </div>

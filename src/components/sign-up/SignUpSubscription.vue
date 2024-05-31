@@ -47,6 +47,7 @@ import { usePlansStore } from '@/stores/plans'
 import { Form as CustomForm } from 'vee-validate'
 import SharedModal from '@/components/reusable/SharedModal.vue'
 import TermsConditions from '@/components/sign-up/TermsConditions.vue'
+import { useRouter } from 'vue-router'
 export default defineComponent({
   components: {
     PaymentInformation,
@@ -85,6 +86,7 @@ export default defineComponent({
   },
 
   setup() {
+    const router = useRouter()
     const open = ref(false)
     const openModal = () => {
       open.value = true
@@ -98,8 +100,9 @@ export default defineComponent({
       subscription.value.push({ zipCode: '' })
     }
 
-    function onSubmit(values: { [key: string]: any }) {
+    function onSubmit(values: { [key: string]: string }) {
       console.log(values)
+      router.push('/subscription-confirmation')
     }
 
     return {

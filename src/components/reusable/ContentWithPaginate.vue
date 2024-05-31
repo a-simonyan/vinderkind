@@ -12,7 +12,7 @@
       class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
     >
       <div v-for="(cart, index) in paginatedItems" :key="index" class="w-full flex justify-center">
-        <CustomCart :data="cart" :customClass="customClass" />
+        <CustomCart :data="cart" :customClass="customClass" :preview="preview" />
       </div>
     </div>
     <SharedPagination
@@ -45,6 +45,9 @@ export default defineComponent({
     data: {
       type: Object,
       required: true
+    },
+    preview: {
+      type: Boolean
     }
   },
   setup(props) {

@@ -24,6 +24,7 @@
 import { defineComponent } from 'vue'
 
 import CustomField from '@/components/reusable/CustomField.vue'
+import { required } from '@/utills/helpers/validation'
 export default defineComponent({
   components: { CustomField },
   props: {
@@ -36,9 +37,6 @@ export default defineComponent({
     }
   },
   setup() {
-    function required(value: unknown): boolean | string {
-      return value ? true : 'This field is required'
-    }
     return {
       required
     }

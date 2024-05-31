@@ -10,12 +10,13 @@
           <span> הערט,ליינט</span>
           <span>!און האט הנאה</span>
         </h2>
-        <button
+        <router-link
+          to="/sign-up"
           class="h-[54px] justify-center bg-vivid-purple max-w-[132px] w-full py-1 flex-col items-center rounded-small px-[22px] flex transition-all duration-300 ease-in hover:opacity-80 self-end sm:self-auto"
         >
           <span class="text-lg/[23px] font-bold font-hebrew text-white">סובסקרייבט</span>
           <span class="text-[13px]/[15px] font-extrabold text-pinkish-purple">Subscribe</span>
-        </button>
+        </router-link>
       </div>
       <img
         src="../../assets/images/home-banner.svg"

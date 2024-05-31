@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { Field } from 'vee-validate'
-
+import { required } from '@/utills/helpers/validation'
 export default defineComponent({
   components: { Field },
   props: {
@@ -41,11 +41,6 @@ export default defineComponent({
     function focusField() {
       isFocused.value = true
     }
-
-    function required(value: unknown): boolean | string {
-      return value ? true : 'This field is required'
-    }
-
     return {
       isFocused,
       focusField,

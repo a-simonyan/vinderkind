@@ -35,6 +35,7 @@
 import { defineComponent, ref } from 'vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
 import { Field } from 'vee-validate'
+import { required } from '@/utills/helpers/validation'
 export default defineComponent({
   components: { IconCheck, Field },
   props: {
@@ -60,10 +61,6 @@ export default defineComponent({
 
     function focusField() {
       isFocused.value = true
-    }
-
-    function required(value: unknown): boolean | string {
-      return value ? true : 'This field is required'
     }
 
     return {

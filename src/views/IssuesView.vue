@@ -1,5 +1,5 @@
 <template>
-  <ContentWithPaginate :page="page" :data="allIssues" />
+  <ContentWithPaginate :page="page" :data="allIssues" :preview="true" />
 </template>
 <script lang="ts">
 import ContentWithPaginate from '@/components/reusable/ContentWithPaginate.vue'
