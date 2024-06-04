@@ -1,6 +1,8 @@
 <template>
-  <div class="pt-[27px] border-t border-t-light-gray">
-    <SharedCheckBox v-model="checked" label="It’s a Gift" />
+  <div class="pt-[27px] border-t border-t-light-gray flex items-center">
+    <SharedCheckBox v-model="checked" />
+    <IconGift />
+    <span class="pl-3">It’s a Gift</span>
   </div>
   <div v-if="checked" class="flex flex-col gap-[17px] mt-4">
     <div class="w-full relative">
@@ -36,8 +38,9 @@ import { Field } from 'vee-validate'
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import CustomField from '@/components/reusable/CustomField.vue'
 import { required } from '@/utills/helpers/validation'
+import IconGift from '@/components/icons/IconGift.vue'
 export default defineComponent({
-  components: { Field, SharedCheckBox, CustomField },
+  components: { Field, SharedCheckBox, CustomField, IconGift },
   props: {
     errors: {
       type: Object,

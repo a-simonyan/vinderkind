@@ -90,7 +90,7 @@ export default {
         { title: 'לאמיר רעדן', subTitle: 'Contact', link: '/contact' },
         { title: 'געצייג', subTitle: 'Accessories', link: '/accessories' },
         { title: 'טעקעס', subTitle: 'Issues', link: '/Issues' },
-        { title: 'וואס איז וואונדערקינד', subTitle: 'About VinderKind', link: '' }
+        { title: 'וואס איז וואונדערקינד', subTitle: 'About VinderKind', link: '/about' }
       ],
       showModal: false,
       isShaking: false

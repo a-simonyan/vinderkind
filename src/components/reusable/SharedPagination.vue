@@ -1,13 +1,18 @@
 <template>
   <div class="flex justify-center gap-4">
     <router-link
-      :to="{ path: $route.path, query: { page: currentPage - 1 } }"
-      :class="currentPage > 1 ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
-      class="flex items-center"
+      :to="{ path: $route.path, query: { page: currentPage + 1 } }"
+      :class="currentPage < totalPages ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
+      class="flex items-center rotate-180"
     >
-      <img src="../../assets/images/arrow.png" alt="arrow" class="w-6 h-6" draggable="false" />
+      <img
+        src="../../assets/images/arrow.png"
+        alt="arrow"
+        class="w-6 h-6 rotate-180"
+        draggable="false"
+      />
     </router-link>
-    <div class="flex gap-[17px]">
+    <div class="flex gap-[17px] flex-row-reverse">
       <router-link
         v-for="pageNumber in visiblePageNumbers"
         :key="pageNumber"
@@ -23,16 +28,11 @@
       </router-link>
     </div>
     <router-link
-      :to="{ path: $route.path, query: { page: currentPage + 1 } }"
-      :class="currentPage < totalPages ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
-      class="flex items-center"
+      :to="{ path: $route.path, query: { page: currentPage - 1 } }"
+      :class="currentPage > 1 ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
+      class="flex items-center rotate-180"
     >
-      <img
-        src="../../assets/images/arrow.png"
-        alt="arrow"
-        class="w-6 h-6 rotate-180"
-        draggable="false"
-      />
+      <img src="../../assets/images/arrow.png" alt="arrow" class="w-6 h-6" draggable="false" />
     </router-link>
   </div>
 </template>

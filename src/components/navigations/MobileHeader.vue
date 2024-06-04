@@ -45,7 +45,7 @@ export default defineComponent({
         { title: 'טעקעס', subTitle: 'Issues', link: '/issues' },
         { title: 'געצייג', subTitle: 'Accessories', link: '/accessories' },
         { title: 'לאמיר רעדן', subTitle: 'Contact', link: '/contact' },
-        { title: '???', subTitle: 'Manage Account', link: '' }
+        { title: '???', subTitle: 'Manage Account', link: '/about' }
       ]
     }
   },

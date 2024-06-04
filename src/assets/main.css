@@ -10,11 +10,20 @@
         font-family: 'Proxima Nova';
         src: url('fonts/ProximaNova-Regular.ttf');
     }
+
+    @font-face {
+        font-family: 'FbReforma';
+        src: url('fonts/FbReforma-Regular.ttf');
+    }
 }
 
 html,
 .font-proxima {
     font-family: "Proxima Nova", system-ui, sans-serif;
+}
+
+.font-reforma {
+    font-family: "FbReforma", system-ui, sans-serif;
 }
 
 input[type=number]::-webkit-inner-spin-button,

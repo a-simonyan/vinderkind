@@ -4,7 +4,8 @@
       Subscription Preference
     </h5>
     <div
-      class="border rounded-small shadow-gray border-black pb-[23px] sm:pb-[29px] pt-10 relative mt-10 sm:mt-[49px] mb-5"
+      :class="dataZip ? 'opacity-100 h-max' : 'opacity-0 h-0 !p-4 !m-0'"
+      class="border rounded-small shadow-gray transition-all duration-300 ease-in border-black pb-[23px] sm:pb-[29px] pt-10 relative mt-10 sm:mt-[49px] mb-5"
     >
       <div class="flex w-full absolute -top-6 justify-center">
         <div
@@ -25,7 +26,7 @@
       </div>
       <div class="flex flex-col items-center">
         <div class="flex items-center gap-1">
-          <span class="text-[21px] font-medium">טעקע</span>
+          <span class="text-[21px] font-semibold font-reforma">טעקע</span>
           <span class="text-3xl font-bold"
             >${{ dataZip ? dataZip[choosePlan]?.perIssue : 0.0 }}</span
           >

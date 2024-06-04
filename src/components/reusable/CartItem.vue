@@ -3,12 +3,17 @@
     class="border border-vivid-purple rounded-small sm:max-w-[524px] w-full flex gap-[26px] px-4 py-6 sm:p-6"
   >
     <div class="max-w-[100px] w-full h-[139px]">
-      <img :src="cart.img" alt="cart image" class="w-full h-full object-contain"   draggable="false" />
+      <img
+        :src="cart.img"
+        alt="cart image"
+        class="w-full h-full object-contain"
+        draggable="false"
+      />
     </div>
     <div class="flex flex-col">
       <div class="flex flex-col gap-[2px]">
         <span class="text-lg/[23px] font-bold">{{ cart.name }}</span>
-        <span class="text-[22px]/[24px] sm:text-lg/[23px]">{{ cart.info }}</span>
+        <span class="text-[22px]/[24px] sm:text-lg/[23px] font-reforma">{{ cart.info }}</span>
         <span class="text-[19px] sm:text-[21px]/[28px] font-bold font-sans">${{ cart.price }}</span>
       </div>
       <div class="flex pt-[17px]">
