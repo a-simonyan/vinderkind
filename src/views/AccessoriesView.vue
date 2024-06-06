@@ -1,17 +1,32 @@
 <template>
-  <ContentWithPaginate :page="page" :data="accessories" />
+  <div>
+    <ContentWithPaginate v-if="accessories" :page="page" :data="accessories" />
+    <div v-else>
+      HERE IS LOADING
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import ContentWithPaginate from '@/components/reusable/ContentWithPaginate.vue'
 import { useAccessoriesStore } from '@/stores/accessories'
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
+
 export default defineComponent({
   components: { ContentWithPaginate },
   setup() {
-    const { accessories } = useAccessoriesStore()
+    const accessoriesStore = useAccessoriesStore()
+
+    const accessories = ref(null);
+
+    onMounted(async () => {
+      await accessoriesStore.fetchAccessories()
+      accessories.value = accessoriesStore.accessories;
+    })
+
     return {
       accessories
     }
+
   },
   data() {
     return {

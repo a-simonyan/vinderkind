@@ -16,7 +16,7 @@
           <span class="text-xl font-bold text-vivid-purple font-hebrew">כאפ א בליק</span>
         </button>
       </div>
-      <img :src="data.img" alt="cart" draggable="false" />
+      <img :src="data.img" alt="cart" draggable="false" style="height: 285px;object-fit:contain;"/>
     </div>
     <span
       class="text-[15px]/[16px] sm:text-lg/[23px] font-medium sm:font-bold text-vivid-purple font-hebrew mt-[10px] block"

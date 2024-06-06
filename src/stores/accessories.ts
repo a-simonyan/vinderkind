@@ -1,94 +1,29 @@
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { defineStore } from 'pinia';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 export const useAccessoriesStore = defineStore('accessories', () => {
-  const lastAccessories = ref([
-    {
-      id: 111,
-      price: '10.99',
-      name: 'Magazine Rack',
-      count: 0,
-      img: '/images/accessories/accessories-1.png'
-    },
-    {
-      id: 22525,
-      price: '69.99',
-      name: 'Headphone',
-      count: 0,
-      img: '/images/accessories/accessories-2.png'
-    },
-    {
-      id: 38758757,
-      price: '29.99',
-      name: 'Vinderkind Speaker',
-      count: 0,
-      img: '/images/accessories/accessories-3.png'
+  const lastAccessories = ref([]);
+  const accessories = ref([]);
+
+  const fetchAccessories = async () => {
+    try {
+      const response = await axios.get('https://staging.vinderkind.com/api/products');
+      accessories.value = response.data.data;
+    } catch (error) {
+      console.error('Error fetching accessories:', error);
     }
-  ])
-  const accessories = ref([
-    {
-      id: 111,
-      price: '10.99',
-      name: 'Magazine Rack',
-      count: 0,
-      img: '/images/accessories/accessories-1.png'
-    },
-    {
-      id: 22525,
-      price: '69.99',
-      name: 'Headphone',
-      count: 0,
-      img: '/images/accessories/accessories-2.png'
-    },
-    {
-      id: 38758757,
-      price: '29.99',
-      name: 'Vinderkind Speaker',
-      count: 0,
-      img: '/images/accessories/accessories-3.png'
-    },
-    {
-      id: 49696,
-      price: '10.99',
-      name: 'Magazine Rack',
-      count: 0,
-      img: '/images/accessories/accessories-1.png'
-    },
-    {
-      id: 59866,
-      price: '69.99',
-      name: 'Headphone',
-      count: 0,
-      img: '/images/accessories/accessories-2.png'
-    },
-    {
-      id: 69795,
-      price: '29.99',
-      name: 'Vinderkind Speaker',
-      count: 0,
-      img: '/images/accessories/accessories-3.png'
-    },
-    {
-      id: 74752582,
-      price: '10.99',
-      name: 'Magazine Rack',
-      count: 0,
-      img: '/images/accessories/accessories-1.png'
-    },
-    {
-      id: 76869963,
-      price: '69.99',
-      name: 'Headphone',
-      count: 0,
-      img: '/images/accessories/accessories-2.png'
-    },
-    {
-      id: 63833,
-      price: '29.99',
-      name: 'Vinderkind Speaker',
-      count: 0,
-      img: '/images/accessories/accessories-3.png'
+  };
+
+  const fetchLastAccessories = async () => {
+    try {
+      const response = await axios.get('https://staging.vinderkind.com/api/products/latest');
+      lastAccessories.value = response.data; 
+    } catch (error) {
+      console.error('Error fetching last accessories:', error);
     }
-  ])
-  return { accessories, lastAccessories }
-})
+  };
+
+  return { accessories, lastAccessories, fetchAccessories, fetchLastAccessories };
+});
+

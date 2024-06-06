@@ -6,7 +6,7 @@
         <span class="text-[17px]/[20px] text-light-purple font-semibold">Accessories</span>
       </div>
       <div
-        v-if="lastAccessories.length"
+        v-if="lastAccessories"
         class="pt-7 max-w-[814px] w-full pl-0 px-5 sm:px-5 lg:px-0"
       >
         <SharedSwiper :data="lastAccessories" :points="points">
@@ -18,21 +18,33 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { useAccessoriesStore } from '@/stores/accessories'
 import CustomCart from '@/components/reusable/CustomCart.vue'
 import SharedSwiper from '@/components/reusable/SharedSwiper.vue'
+
 export default defineComponent({
   components: { CustomCart, SharedSwiper },
+
   setup() {
-    const { lastAccessories } = useAccessoriesStore()
+    const lastAccessoriesStore = useAccessoriesStore()
+
+    const lastAccessories = ref(null);
+
+    onMounted(async () => {
+      await lastAccessoriesStore.fetchLastAccessories()
+      lastAccessories.value = lastAccessoriesStore.lastAccessories;
+    })
 
     return {
       lastAccessories
     }
+
   },
-  data: function () {
+  
+  data() {
     return {
       points: {
         300: { slidesPerView: 1.5 },
@@ -43,3 +55,4 @@ export default defineComponent({
   }
 })
 </script>
+

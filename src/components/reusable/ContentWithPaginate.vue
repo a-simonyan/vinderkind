@@ -43,13 +43,14 @@ export default defineComponent({
       required: true
     },
     data: {
-      type: Object,
+      type: Array,
       required: true
     },
     preview: {
       type: Boolean
     }
   },
+
   setup(props) {
     const route = useRoute()
     const router = useRouter()

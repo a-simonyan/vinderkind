@@ -1,18 +1,36 @@
 <template>
-  <ContentWithPaginate :page="page" :data="allIssues" :preview="true" />
+  <div>
+    <ContentWithPaginate v-if="allIssues" :page="page" :data="allIssues" :preview="true" />
+    <div v-else>
+      HERE IS LOADING
+    </div>
+  </div>
 </template>
 <script lang="ts">
 import ContentWithPaginate from '@/components/reusable/ContentWithPaginate.vue'
 import { useIssuesStore } from '@/stores/issues'
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
+
 export default defineComponent({
   components: { ContentWithPaginate },
+
   setup() {
-    const { allIssues } = useIssuesStore()
+    const allIssuesStore = useIssuesStore()
+
+    const  allIssues = ref(null);
+
+    onMounted(async () => {
+      await allIssuesStore.fetchIssues()
+      allIssues.value = allIssuesStore.allIssues;
+    })
+
     return {
       allIssues
     }
+
   },
+
+
   data() {
     return {
       page: {
