@@ -8,7 +8,10 @@
         >Latest Issues
       </span>
     </div>
-    <div class="max-w-[1100px] w-full pl-0 pr-[23px] sm:px-5 xl:px-0">
+    <div v-if="!lastIssues.length">
+      <CustomLoader />
+    </div>
+    <div v-else class="max-w-[1100px] w-full pl-0 pr-[23px] sm:px-5 xl:px-0">
       <SharedSwiper :data="lastIssues" :points="points">
         <template #default="{ index, content }">
           <CustomCart :data="content" :key="index" :preview="true" />
@@ -29,8 +32,9 @@ import { defineComponent, onMounted, ref } from 'vue'
 import { useIssuesStore } from '@/stores/issues'
 import CustomCart from '@/components/reusable/CustomCart.vue'
 import SharedSwiper from '@/components/reusable/SharedSwiper.vue'
+import CustomLoader from '@/components/reusable/CustomLoader.vue'
 export default defineComponent({
-  components: { CustomCart, SharedSwiper },
+  components: { CustomCart, SharedSwiper, CustomLoader },
   data: function () {
     return {
       points: {
@@ -46,17 +50,16 @@ export default defineComponent({
   setup() {
     const lastIssuesStore = useIssuesStore()
 
-    const lastIssues = ref(null);
+    const lastIssues = ref([])
 
     onMounted(async () => {
       await lastIssuesStore.fetchLastIssues()
-      lastIssues.value = lastIssuesStore.lastIssues;
+      lastIssues.value = lastIssuesStore.lastIssues
     })
 
     return {
       lastIssues
     }
-
-  },
+  }
 })
 </script>

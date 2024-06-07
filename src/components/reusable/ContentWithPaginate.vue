@@ -8,19 +8,26 @@
         {{ page.enTitle }}</span
       >
     </div>
-    <div
-      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
-    >
-      <div v-for="(cart, index) in paginatedItems" :key="index" class="w-full flex justify-center">
-        <CustomCart :data="cart" :customClass="customClass" :preview="preview" />
+    <div v-if="paginatedItems.length">
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
+      >
+        <div
+          v-for="(cart, index) in paginatedItems"
+          :key="index"
+          class="w-full flex justify-center"
+        >
+          <CustomCart :data="cart" :customClass="customClass" :preview="preview" />
+        </div>
       </div>
+      <SharedPagination
+        :total-items="data.length"
+        :items-per-page="8"
+        :current-page="currentPage"
+        @page-changed="handlePageChange"
+      />
     </div>
-    <SharedPagination
-      :total-items="data.length"
-      :items-per-page="8"
-      :current-page="currentPage"
-      @page-changed="handlePageChange"
-    />
+    <div v-else><CustomLoader /></div>
   </div>
 </template>
 
@@ -29,9 +36,10 @@ import { defineComponent, computed } from 'vue'
 import CustomCart from '../reusable/CustomCart.vue'
 import SharedPagination from '../reusable/SharedPagination.vue'
 import { useRoute, useRouter } from 'vue-router'
+import CustomLoader from '@/components/reusable/CustomLoader.vue'
 
 export default defineComponent({
-  components: { CustomCart, SharedPagination },
+  components: { CustomCart, SharedPagination, CustomLoader },
   data: function () {
     return {
       customClass: 'max-w-none'
@@ -43,7 +51,7 @@ export default defineComponent({
       required: true
     },
     data: {
-      type: Array,
+      type: Object,
       required: true
     },
     preview: {

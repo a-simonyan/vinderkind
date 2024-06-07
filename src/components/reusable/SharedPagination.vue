@@ -2,7 +2,11 @@
   <div class="flex justify-center gap-4">
     <router-link
       :to="{ path: $route.path, query: { page: currentPage + 1 } }"
-      :class="currentPage < totalPages ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
+      :class="
+        currentPage < totalPages
+          ? 'cursor-pointer opacity-100'
+          : 'opacity-50 cursor-default pointer-events-none'
+      "
       class="flex items-center rotate-180"
     >
       <img
@@ -29,7 +33,11 @@
     </div>
     <router-link
       :to="{ path: $route.path, query: { page: currentPage - 1 } }"
-      :class="currentPage > 1 ? 'cursor-pointer opacity-100' : 'opacity-50 cursor-default'"
+      :class="
+        currentPage > 1
+          ? 'cursor-pointer opacity-100'
+          : 'opacity-50 cursor-default pointer-events-none'
+      "
       class="flex items-center rotate-180"
     >
       <img src="../../assets/images/arrow.png" alt="arrow" class="w-6 h-6" draggable="false" />
