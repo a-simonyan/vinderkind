@@ -29,6 +29,3 @@ export const useIssuesStore = defineStore('issues', () => {
 
   return { allIssues, lastIssues, fetchIssues, fetchLastIssues };
 });
-
-
-

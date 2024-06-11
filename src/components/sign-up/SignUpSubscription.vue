@@ -48,6 +48,7 @@ import { Form as CustomForm } from 'vee-validate'
 import SharedModal from '@/components/reusable/SharedModal.vue'
 import TermsConditions from '@/components/sign-up/TermsConditions.vue'
 import { useRouter } from 'vue-router'
+import { signUpStore } from '@/stores/sign-up'
 export default defineComponent({
   components: {
     PaymentInformation,
@@ -100,7 +101,11 @@ export default defineComponent({
       subscription.value.push({ zipCode: '' })
     }
 
-    function onSubmit(values: { [key: string]: string }) {
+    const signUp = signUpStore();
+
+    async function onSubmit(values: { [key: string]: string }) {
+      console.log(values, "values")
+      await signUp.submitForSubscription(values.contact);
       console.log(values)
       router.push('/subscription-confirmation')
     }

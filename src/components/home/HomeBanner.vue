@@ -39,7 +39,7 @@
       <h2 class="text-white text-[35px]/[46px] sm:text-[47px]/[61px] font-bold font-hebrew">
         וואונדערקונד ניגן
       </h2>
-      <audio-player />
+      <audio-player :data="data" />
     </div>
   </div>
 </template>
@@ -47,6 +47,14 @@
 import { defineComponent } from 'vue'
 import AudioPlayer from '@/components/reusable/AudioPlayer.vue'
 export default defineComponent({
-  components: { AudioPlayer }
+  components: { AudioPlayer },
+  data: function () {
+    return {
+      data: {
+        id: '1',
+        mp3: '/audio/vinderkind.mp3'
+      }
+    }
+  }
 })
 </script>

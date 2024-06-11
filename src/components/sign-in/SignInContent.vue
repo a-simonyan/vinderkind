@@ -10,15 +10,16 @@
         Enter your email address or phone number
       </span>
       <Field
-        v-validate="'email'"
-        data-vv-as="email"
-        name="field"
+        v-validate="'required|validateContact'"
+        data-vv-as="contact information"
+        name="contact"
         :rules="[required, validateContact] as RuleExpression<unknown>"
+        v-model="contact"
         class="border-charcoal border rounded-small placeholder:text-silver text-xl h-[53px] px-[18px] w-full mt-[13px]"
         placeholder="Email address or phone number"
       />
 
-      <span class="text-xs text-red-500">{{ errors.field }}</span>
+      <span class="text-xs text-red-500">{{ errors.contact }}</span>
 
       <button
         class="mt-[18px] bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
@@ -28,20 +29,26 @@
     </CustomForm>
   </div>
 </template>
+
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { Field, Form as CustomForm, type RuleExpression } from 'vee-validate'
+import { signInStore } from '@/stores/sign-in'
 
 export default defineComponent({
   components: { Field, CustomForm },
   setup() {
+    const contact = ref('')
+    const contactStore = signInStore()
+
     function required(value: string) {
       return !!value || 'This field is required'
     }
+
     function validateContact(contact: string) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      const phoneRegex = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
 
-      const phoneRegex = /^\d+$/
       if (emailRegex.test(contact)) {
         return true
       } else if (phoneRegex.test(contact)) {
@@ -50,12 +57,16 @@ export default defineComponent({
         return 'Invalid contact information.'
       }
     }
-    function onSubmit() {}
+
+    async function onSubmit(values: any) {
+      await contactStore.submitContact(values.contact)
+    }
 
     return {
       required,
+      validateContact,
       onSubmit,
-      validateContact
+      contact
     }
   }
 })

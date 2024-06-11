@@ -23,7 +23,7 @@
       >{{ data.name }}</span
     >
     <span class="text-lg/[19px] sm:text-xl/[27px] text-vivid-purple font-hebrew">{{
-      data.info
+      data.description
     }}</span>
     <ButtonBasket :data="data" />
   </div>

@@ -1,8 +1,8 @@
 <template>
   <div id="audio-player-root">
     <div>
-      <audio style="display: none" ref="player" :id="playerid">
-        <source src="/audio/vinderkind.mp3" type="audio/mpeg" />
+      <audio style="display: none" ref="player" :id="data.id">
+        <source :src="data.mp3" type="audio/mpeg" />
       </audio>
     </div>
     <div
@@ -39,7 +39,13 @@ import IconPause from '@/components/icons/IconPause.vue'
 
 export default {
   components: { IconPlay, IconPause },
-  props: ['url', 'playerid'],
+  // props: ['url', 'playerid'],
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       playbackTime: 0,
@@ -208,3 +214,4 @@ input[type='range']:focus {
   display: none;
 }
 </style>
+  

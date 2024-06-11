@@ -1,7 +1,9 @@
 <template>
   <div>
     <ContentWithPaginate v-if="accessories" :page="page" :data="accessories" />
-    <div v-else>HERE IS LOADING</div>
+    <div v-else>
+      HERE IS LOADING
+    </div>
   </div>
 </template>
 <script lang="ts">

@@ -7,19 +7,20 @@
         <ButtonBasket :data="data" />
       </div>
       <div class="w-[88vw] sm:w-[472px] h-[400px] sm:h-[567px]">
-        <iframe src="/pdf.pdf" width="100%" height="100%"></iframe>
+        <iframe :src="data.pdf" width="450px" height="550px"></iframe>
       </div>
       <div class="flex flex-col">
         <span class="text-[29px]/[32px] text-vivid-purple font-hebrew font-bold font-reforma">{{
           data.name
         }}</span>
         <span class="text-2xl/[27px] text-vivid-purple mt-1 block font-reforma">{{
-          data.info
+          data.description || data.info
         }}</span>
         <span class="text-[21px]/[28px] font-sans font-bold mt-[18px] sm:mt-[33px] mb-[17px] block"
           >Audio Sample</span
         >
-        <AudioPlayer />
+
+        <AudioPlayer :data="data" />
         <div class="hidden sm:flex mt-6">
           <ButtonBasket :data="data" />
         </div>
