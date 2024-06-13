@@ -10,12 +10,12 @@
     </div>
     <div v-if="paginatedItems.length">
       <div
-        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
+        class="flex flex-col-reverse lg:justify-start justify-center sm:flex-row-reverse sm:flex-wrap gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
       >
         <div
           v-for="(cart, index) in paginatedItems"
           :key="index"
-          class="w-full flex justify-center"
+          class="flex justify-center sm:w-1/3 md:w-[252px]"
         >
           <CustomCart :data="cart" :customClass="customClass" :preview="preview" />
         </div>

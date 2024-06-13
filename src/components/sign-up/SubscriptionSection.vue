@@ -12,7 +12,7 @@
       :zipCode="subscribtion.zipCode"
       :errors="errors"
       @update:modelValue="updateZipCode"
-      :index="index"
+      :index="index" 
       :checkZip="dataZip?.status"
       @updateZipCode="updateZipCode"
     />

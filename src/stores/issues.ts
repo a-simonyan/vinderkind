@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref } from 'vue';
+import { fetchData } from '@/api/query';
 
 export const useIssuesStore = defineStore('issues', () => {
   const lastIssues = ref([]);
@@ -8,8 +8,8 @@ export const useIssuesStore = defineStore('issues', () => {
 
   const fetchIssues = async () => {
     try {
-      const allIssuesResponse = await axios.get('https://staging.vinderkind.com/api/issues');
-      allIssues.value = allIssuesResponse.data.data;
+      const allIssuesResponse:any = await fetchData('issues', 'get');
+      allIssues.value = allIssuesResponse?.data.data;
     } catch (error) {
       console.error('Error fetching issues:', error);
     }
@@ -17,15 +17,12 @@ export const useIssuesStore = defineStore('issues', () => {
 
   const fetchLastIssues = async () => {
     try {
-      const response = await axios.get('https://staging.vinderkind.com/api/issues/latest');
-      lastIssues.value = response.data; 
+      const response:any = await fetchData('issues/latest', 'get');
+      lastIssues.value = response?.data; 
     } catch (error) {
       console.error('Error fetching last Issues:', error);
     }
   };
-
-  onMounted(fetchIssues);
-  onMounted(fetchLastIssues);
 
   return { allIssues, lastIssues, fetchIssues, fetchLastIssues };
 });

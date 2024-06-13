@@ -6,7 +6,7 @@
       <div class="flex sm:hidden w-[230px] self-start">
         <ButtonBasket :data="data" />
       </div>
-      <div class="w-[88vw] sm:w-[472px] h-[400px] sm:h-[567px]">
+      <div class="w-[88vw] sm:w-[472px] h-[400px] sm:h-[567px] poster">
         <iframe :src="data.pdf" width="450px" height="550px"></iframe>
       </div>
       <div class="flex flex-col">
@@ -42,3 +42,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style scoped>
+.poster iframe #document img {
+  height: 550px;
+}
+</style>

@@ -11,6 +11,7 @@ import OrderConfirmationView from '@/views/OrderConfirmationView.vue'
 import SubscriptionConfirmationView from '@/views/SubscriptionConfirmationView.vue'
 import CheckoutView from '@/views/CheckoutView.vue'
 import AboutView from '@/views/AboutView.vue'
+import OneTimeCode from '@/components/sign-in/OneTimeCode.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,10 @@ const router = createRouter({
         {
           path: '/about',
           component: AboutView
+        },
+        { path: '/get-code', 
+          component: OneTimeCode, 
+          name: 'GetCode' 
         }
       ]
     }

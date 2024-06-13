@@ -13,14 +13,14 @@
     v-else
     class="flex items-center w-full justify-between px-2 sm:px-[15px] h-[43px] sm:h-[54px] cursor-pointer bg-vivid-purple rounded-small py-3 text-white gap-[13px] sm:gap-5 mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
   >
-    <button @click="addCart(data, false)" class="w-4 h-4">
-      <IconMinus class="[&_path]:fill-white" />
+    <button @click="addCart(data, false)" class="w-1/4 h-full flex justify-center items-center">
+      <IconMinus class="[&_path]:fill-white w-4 h-4" />
     </button>
-    <span class="text-[15px] line-clamp-1 sm:text-[21px]/[28px] text-wgite font-sans font-bold"
+    <span class="w-3/4 text-[15px] line-clamp-1 sm:text-[21px]/[28px] text-wgite font-sans font-bold"
       >{{ data.count }} in Cart</span
     >
-    <button @click="addCart(data)" class="w-4 h-4">
-      <IconPlus class="[&_path]:fill-white" />
+    <button @click="addCart(data)" class="w-1/4 h-full flex justify-center items-center">
+      <IconPlus class="[&_path]:fill-white w-4 h-4" />
     </button>
   </div>
 </template>
