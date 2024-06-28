@@ -1,30 +1,59 @@
-import { defineStore } from 'pinia';
-import { fetchData } from '@/api/query';
+import { defineStore } from 'pinia'
+import { fetchData } from '@/api/query'
+import router from '@/router'
+import { useToast } from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-sugar.css'
 
-export const signUpStore = defineStore('contact', {
-  state: () => ({
-    contact: '',
+const $toast = useToast()
+interface GiftInformation {
+  name: string
+  gift_note: string
+}
+
+interface Address {
+  name: string
+  address_line_1: string
+  address_line_2: string
+  city: string
+  state: string
+  zip: string
+}
+
+interface Subscription {
+  cycle: 'yearly' | 'monthly'
+  startMonth: number
+  gift: boolean
+  gift_information?: GiftInformation
+  address: Address
+}
+
+interface OrderState {
+  subscriptions: Subscription[]
+}
+
+export const useOrderStore = defineStore('order', {
+  state: (): OrderState => ({
+    subscriptions: []
   }),
   actions: {
-    async submitForSubscription(contact: string) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const phoneRegex = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
-
-      if (emailRegex.test(contact)) {
-        const body = {
-            type: 'email',
-            typeText: 'email address',
-            value: contact
-        }
-        await fetchData('get-code', 'post' , body)
-      } else if (phoneRegex.test(contact)) {
-        const body = {
-            type: 'phone',
-            typeText: 'phone number',
-            value: contact
-        }
-        await fetchData('get-code', 'post' , body)
+    async submitOrder(values: Object) {
+      const response: any = await fetchData('orders', 'post', {
+        order: values
+      })
+      if (!response.err) {
+        router.push('/subscription-confirmation')
+        $toast.open({
+          message: 'Success!',
+          type: 'success',
+          position: 'top-right'
+        })
+      } else {
+        $toast.open({
+          message: 'Something went wrong!',
+          type: 'error',
+          position: 'top-right'
+        })
       }
-    },
-  },
-});
+    }
+  }
+})

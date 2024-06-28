@@ -24,8 +24,12 @@
     Payment infomation
   </h5>
   <div class="flex flex-col relative">
-    <CustomField name="cart" :rules="[required]" placeholder="Name on card" />
-    <span class="text-red-500 text-xs pt-1">{{ errors.cart }}</span>
+    <div class="mb-4">
+      <CustomField name="cartName" :rules="[required]" placeholder="Name on card" />
+      <span class="text-red-500 text-xs pt-1">{{ errors.cartName }}</span>
+    </div>
+    <CustomField name="cardNumber" :rules="[required, cardValidation]" placeholder="Card number" />
+    <span class="text-red-500 text-xs pt-1">{{ errors.cardNumber }}</span>
   </div>
   <div
     class="mt-[17px] h-[49px] sm:h-[53px] flex gap-1 sm:grid grid-cols-3 border border-charcoal justify-between rounded-small px-5 pt-4 pb-[13px] w-full text-xl/6 placeholder:text-silver focus:outline-vivid-purple"
@@ -57,17 +61,25 @@
   </div>
   <div class="flex flex-col justify-between bg-lavender rounded-small py-[14px] px-[22px] mt-6">
     <div class="flex justify-between">
-      <span class="text-base sm:text-xl/6">Total Payment $219.98</span>
+      <span class="text-base sm:text-xl/6"
+        >Total Payment ${{ calculateTotalAmount(totalPayment) }}</span
+      >
       <button @click.prevent="toggleViewMore" class="text-[15px] text-vivid-purple font-raleway">
         {{ !viewMore ? 'View Details' : 'Hide Details' }}
       </button>
     </div>
     <div v-if="viewMore" class="mt-4">
       <div class="flex flex-col gap-3">
-        <div v-for="(item, index) in orderInfo" :key="index">
-          <div class="flex justify-between text-base items-center">
-            <span>{{ item.title }}</span>
-            <span>{{ item.price }}</span>
+        <div class="flex justify-between text-base items-center">
+          <span>Vinderkind Subscription</span>
+          <span>${{ calculateZip() }}</span>
+        </div>
+        <div v-if="totalPayment.products.length">
+          <div v-for="(item, index) in totalPayment.products" :key="index">
+            <div class="flex justify-between text-base items-center">
+              <span>{{ item.name }}</span>
+              <span>${{ item.price }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -80,25 +92,12 @@ import IconCoupon from '@/components/icons/IconCoupon.vue'
 import { Field } from 'vee-validate'
 import CustomField from '@/components/reusable/CustomField.vue'
 import { required } from '@/utills/helpers/validation'
+import { useTotalPaymentStore } from '@/stores/totalPayment'
 export default defineComponent({
   components: { IconCoupon, Field, CustomField },
   data() {
     return {
-      expiryDate: '',
-      orderInfo: [
-        {
-          title: 'Yearly Vinderkind Subscription',
-          price: '$219.98'
-        },
-        {
-          title: 'חודש כסלו תשפ״ד טעקע 4',
-          price: '$19.98'
-        },
-        {
-          title: 'Vinderkind Speaker',
-          price: '$29.98'
-        }
-      ]
+      expiryDate: ''
     }
   },
   props: {
@@ -112,12 +111,18 @@ export default defineComponent({
     }
   },
   setup() {
+    const cardValidation = (value: string) => {
+      const regex = /^\d{16}$/
+      return regex.test(value) ? true : 'Invalid card'
+    }
+
     const isDivVisible = ref(false)
     const viewMore = ref(false)
     function toggleDivVisibility() {
       isDivVisible.value = !isDivVisible.value
     }
-
+    const { calculateTotalAmount, totalPayment, calculateProduct, calculateZip } =
+      useTotalPaymentStore()
     function toggleViewMore() {
       viewMore.value = !viewMore.value
     }
@@ -134,7 +139,12 @@ export default defineComponent({
       viewMore,
       toggleViewMore,
       focusField,
-      isFocused
+      isFocused,
+      calculateTotalAmount,
+      totalPayment,
+      calculateProduct,
+      calculateZip,
+      cardValidation
     }
   }
 })

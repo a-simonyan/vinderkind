@@ -12,7 +12,7 @@
       :zipCode="subscribtion.zipCode"
       :errors="errors"
       @update:modelValue="updateZipCode"
-      :index="index" 
+      :index="index"
       :checkZip="dataZip?.status"
       @updateZipCode="updateZipCode"
     />
@@ -28,11 +28,30 @@
         :publication="publication"
         :updateChoosePlan="updateChoosePlan"
         :dataZip="dataZip?.data"
+        :index="index"
       />
       <GiftInformation :errors="errors" :index="index" />
-      <YourInformation :yourInfo="yourInfo" :errors="errors" />
-      <div class="pt-6 pb-[31px] border-b border-b-light-gray">
-        <SharedCheckBox label="Sign up for Vinderkind emails" />
+      <div v-if="index === 0">
+        <YourInformation :yourInfo="yourInfo" :errors="errors" />
+      </div>
+      <div v-if="index === 0" class="pt-6 pb-[31px] border-b border-b-light-gray">
+        <Field
+          v-slot="{ field }"
+          name="signup"
+          type="checkbox"
+          :value="true"
+          :unchecked-value="false"
+        >
+          <label class="flex items-center gap-[10px]">
+            <input
+              type="checkbox"
+              v-bind="field"
+              :value="true"
+              class="w-[25px] h-[25px] rounded-small border border-charcoal cursor-pointer accent-vivid-purple"
+            />
+            Sign up for Vinderkind emails
+          </label>
+        </Field>
       </div>
       <DeliverInformation :deliveryInfo="deliveryInfo" :errors="errors" />
       <button
@@ -51,21 +70,22 @@ import SubscriptionPreferance from '@/components/sign-up/SubscriptionPreferance.
 import GiftInformation from '@/components/sign-up/GiftInformation.vue'
 import YourInformation from '@/components/sign-up/YourInformation.vue'
 import DeliverInformation from '@/components/sign-up/DeliverInformation.vue'
-import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import IconPlus from '@/components/icons/IconPlus.vue'
 import { usePlansStore } from '@/stores/plans'
+import { useTotalPaymentStore } from '@/stores/totalPayment'
 import { required } from '@/utills/helpers/validation'
 import { emailValidation } from '@/utills/helpers/validation'
 import { fetchData } from '@/api/query'
+import { Field } from 'vee-validate'
 export default defineComponent({
   components: {
     DeliveryZipCode,
     SubscriptionPreferance,
     GiftInformation,
     YourInformation,
-    SharedCheckBox,
     DeliverInformation,
-    IconPlus
+    IconPlus,
+    Field
   },
   props: {
     errors: {
@@ -106,11 +126,11 @@ export default defineComponent({
       deliveryInfo: [
         {
           placeholder: 'Address',
-          field: 'address' + '-' + props.index
+          field: 'address_line_1' + '-' + props.index
         },
         {
           placeholder: 'Address Line 2',
-          field: 'address2' + '-' + props.index
+          field: 'address_line_2' + '-' + props.index
         },
         {
           placeholder: 'City, State, ZIP',
@@ -122,25 +142,38 @@ export default defineComponent({
   methods: {
     updateZipCode(value: string) {
       this.$emit('update:subscribtion', value)
+      const id = this.index
       if (value.length === 5) {
         fetchData(`zip/${value}`).then((res) => {
           this.dataZip = res
           this.$emit('enableSection', true)
+          // @ts-ignore
+          const defoultPlan = res?.data.filter((it) => it.type === 'yearly')[0]
+
+          this.handleZipsPayment({ id, ...defoultPlan })
         })
       } else {
         this.dataZip = []
         this.$emit('enableSection', false)
+        this.deleteZip(id)
       }
     },
     removeSubscripion() {
       this.$props.allsubscription.splice(this.$props.index, 1)
+      this.deleteZip(this.index)
     }
   },
-  setup() {
+  setup(props) {
     let dataZip = ref()
     let choosePlan = ref('0')
     const { publication } = usePlansStore()
-    const updateChoosePlan = (planId: string) => {
+    const { totalPayment, handleZipsPayment, deleteZip } = useTotalPaymentStore()
+    const updateChoosePlan = (planId: string, plan: Object) => {
+      deleteZip(props.index)
+      handleZipsPayment({
+        id: props.index,
+        ...plan
+      })
       choosePlan.value = planId
     }
 
@@ -150,7 +183,10 @@ export default defineComponent({
       updateChoosePlan,
       emailValidation,
       required,
-      dataZip
+      dataZip,
+      totalPayment,
+      handleZipsPayment,
+      deleteZip
     }
   }
 })

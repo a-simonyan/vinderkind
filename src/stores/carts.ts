@@ -10,24 +10,7 @@ interface CartItem {
 }
 
 export const useCartsStore: StoreDefinition<string> = defineStore('carts', () => {
-  const carts = ref<CartItem[]>([
-    {
-      id: 4,
-      name: 'כסלו תשפ״ד',
-      info: 'טעקע 4',
-      price: 19.99,
-      count: 1,
-      img: '/images/carts/cart_image_2.png'
-    },
-    {
-      id: 5,
-      name: 'Vinderkind Speaker',
-      info: '',
-      price: 29.99,
-      count: 1,
-      img: '/images/carts/cart_image_2.png'
-    }
-  ])
+  const carts = ref<CartItem[]>([])
 
   const updateCount = (cartId: number, increment = true) => {
     const cart = carts.value.find((cart) => cart.id === cartId)

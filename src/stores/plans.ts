@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const usePlansStore = defineStore('plans', () => {
+  const zip = ref([])
   const publication = [
     {
       id: 0,
@@ -15,5 +17,5 @@ export const usePlansStore = defineStore('plans', () => {
       label: 'חודש אדר א׳ תשפ״ד טעקע 7'
     }
   ]
-  return { publication }
+  return { publication, zip }
 })

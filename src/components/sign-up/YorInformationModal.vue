@@ -1,5 +1,5 @@
 <template>
-  <CustomForm v-slot="{ errors, values }" @submit="onSubmit">
+  <CustomForm v-slot="{ errors }" @submit="onSubmit">
     <div class="pt-9 pb-[45px] pl-[33px] pr-[48px] min-w-[80vw] sm:min-w-[605px] w-full">
       <h5 class="text-[19px]/[22px] sm:text-[27px]/[31px] font-semibold font-raleway mb-4">
         Your information
@@ -22,7 +22,7 @@
       <div class="mt-6 mb-5">
         <SharedCheckBox label="Sign up for Dee Voch emails" />
       </div>
-      <button @click.prevent="getUpdates(values)"
+      <button
         class="flex justify-center bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
       >
         Sign up for Vinderkind Updates
@@ -59,14 +59,9 @@ export default defineComponent({
     }
   },
   methods: {
-    onSubmit(values: { [key: string]: string }) {
-      this.$emit('close')
-    },
-
-    async getUpdates(values: { [key: string]: string }) {
-      const updateStore = useUpdateStore();
-      await updateStore.getUpdates(values);
-      this.$emit('close')
+    async onSubmit(values: { [key: string]: string }) {
+      const updateStore = useUpdateStore()
+      await updateStore.getUpdates(values)
     }
   },
 

@@ -13,12 +13,19 @@
           class="max-w-[282px] sm:max-w-[308px] w-full bg-vivid-purple rounded-[32px] px-[9px] py-[6px] flex flex-row-reverse"
         >
           <button
-            v-for="(plan, index) in dataZip"
-            :key="index"
-            class="w-full flex justify-center items-center gap-2 py-[6px] transition-all ease-linear duration-200"
-            :class="choosePlan == index ? 'bg-white text-black rounded-[32px]' : 'text-white'"
-            @click.prevent="updateChoosePlan(index)"
+            v-for="(plan, idx) in dataZip"
+            :key="idx"
+            class="w-full flex justify-center items-center gap-2 py-[6px] transition-all ease-linear duration-200 relative"
+            :class="choosePlan == idx ? 'bg-white text-black rounded-[32px]' : 'text-white'"
           >
+            <Field
+              :name="'plan' + '-' + index"
+              type="radio"
+              v-model="selectedSubscriptionType"
+              :value="plan.type"
+              class="w-full h-full absolute opacity-0"
+              @click="updateChoosePlan(idx, plan)"
+            />
             <span v-if="plan?.save" class="text-xs/[14px] font-bold">Save {{ plan?.save }}</span>
             <span class="text-[19px]/[24px] font-hebrew font-bold">{{ plan?.name }}</span>
           </button>
@@ -70,8 +77,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
+import { Field } from 'vee-validate'
 export default defineComponent({
-  components: { SharedCheckBox },
+  components: { SharedCheckBox, Field },
   props: {
     publication: {
       type: Object,
@@ -88,16 +96,22 @@ export default defineComponent({
     dataZip: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      required: true
     }
   },
   setup() {
     const isDivVisible = ref(false)
+    const selectedSubscriptionType = ref('yearly')
 
     function toggleDivVisibility() {
       isDivVisible.value = !isDivVisible.value
     }
     return {
       isDivVisible,
+      selectedSubscriptionType,
       toggleDivVisibility
     }
   }

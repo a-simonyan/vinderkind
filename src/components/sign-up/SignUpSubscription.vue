@@ -22,7 +22,7 @@
         <button
           class="mt-[15px] mb-[18px] bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
         >
-          Subscribe & Pay $219.98
+          Subscribe & Pay ${{ calculateTotalAmount(totalPayment) }}
         </button>
         <div class="text-[13px]/[17px] flex flex-col">
           <span class="text-center">By clicking on the subscribe button, you agree with our </span>
@@ -47,8 +47,9 @@ import { usePlansStore } from '@/stores/plans'
 import { Form as CustomForm } from 'vee-validate'
 import SharedModal from '@/components/reusable/SharedModal.vue'
 import TermsConditions from '@/components/sign-up/TermsConditions.vue'
-import { useRouter } from 'vue-router'
-import { signUpStore } from '@/stores/sign-up'
+import { useOrderStore } from '@/stores/sign-up'
+import { transformData } from '@/utills/helpers/validation'
+import { useTotalPaymentStore } from '@/stores/totalPayment'
 export default defineComponent({
   components: {
     PaymentInformation,
@@ -87,7 +88,7 @@ export default defineComponent({
   },
 
   setup() {
-    const router = useRouter()
+    const { calculateTotalAmount, totalPayment } = useTotalPaymentStore()
     const open = ref(false)
     const openModal = () => {
       open.value = true
@@ -101,13 +102,16 @@ export default defineComponent({
       subscription.value.push({ zipCode: '' })
     }
 
-    const signUp = signUpStore();
-
-    async function onSubmit(values: { [key: string]: string }) {
-      console.log(values, "values")
-      await signUp.submitForSubscription(values.contact);
-      console.log(values)
-      router.push('/subscription-confirmation')
+    const signUp = useOrderStore()
+    async function onSubmit(values: Object) {
+      const cloneProducts = totalPayment.products
+      const products = cloneProducts.map((item) => {
+        return {
+          id: item.id,
+          quantity: 1
+        }
+      })
+      await signUp.submitOrder({ ...transformData(values), products })
     }
 
     return {
@@ -117,7 +121,9 @@ export default defineComponent({
       addSubscripbtion,
       open,
       openModal,
-      closeModal
+      closeModal,
+      calculateTotalAmount,
+      totalPayment
     }
   }
 })

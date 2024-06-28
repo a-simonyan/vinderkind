@@ -42,7 +42,7 @@ export default defineComponent({
         480: { slidesPerView: 2.5 },
         640: { slidesPerView: 3 },
         740: { slidesPerView: 3.5 },
-        1024: { slidesPerView: 4 }
+        1024: { slidesPerView: 4.1 }
       }
     }
   },

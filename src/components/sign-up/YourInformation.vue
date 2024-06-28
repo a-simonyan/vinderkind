@@ -15,16 +15,16 @@
       />
       <span class="text-red-500 text-xs pt-1">{{ errors[field.field] }}</span>
     </div>
-    <PhoneInput :phone="yourInfo.phone" />
+    <CustomField name="phone" :rules="[required]" placeholder="Phone" />
+    <span class="text-red-500 text-xs pt-1">{{ errors.phone }}</span>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PhoneInput from '@/components/reusable/PhoneInput.vue'
 import CustomField from '@/components/reusable/CustomField.vue'
 import { required } from '@/utills/helpers/validation'
 export default defineComponent({
-  components: { PhoneInput, CustomField },
+  components: { CustomField },
   props: {
     yourInfo: {
       type: Object,
