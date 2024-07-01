@@ -19,11 +19,8 @@
           <span class="text-red-500 text-xs pt-1">{{ errors[field.field] }}</span>
         </div>
       </div>
-      <div class="mt-6 mb-5">
-        <SharedCheckBox label="Sign up for Dee Voch emails" />
-      </div>
       <button
-        class="flex justify-center bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
+        class="mt-4 flex justify-center bg-vivid-purple w-full py-4 text-[21px]/[25px] text-white rounded-small font-bold hover:opacity-90 transition-all ease-in duration-150"
       >
         Sign up for Vinderkind Updates
       </button>
@@ -37,11 +34,10 @@ import { Form as CustomForm } from 'vee-validate'
 import { required } from '@/utills/helpers/validation'
 import CustomField from '@/components/reusable/CustomField.vue'
 import { emailValidation } from '@/utills/helpers/validation'
-import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
 import { useUpdateStore } from '@/stores/use-updates'
 
 export default defineComponent({
-  components: { CustomForm, CustomField, SharedCheckBox },
+  components: { CustomForm, CustomField },
   data() {
     return {
       yourInfo: [
@@ -59,13 +55,17 @@ export default defineComponent({
     }
   },
   methods: {
+    handleClose() {
+      this.$emit('close')
+    },
     async onSubmit(values: { [key: string]: string }) {
       const updateStore = useUpdateStore()
-      await updateStore.getUpdates(values)
+      await updateStore.getUpdates(values, this.handleClose)
     }
   },
 
   setup() {
+    const handleClose = () => {}
     return {
       required,
       emailValidation

@@ -5,7 +5,7 @@ import 'vue-toast-notification/dist/theme-sugar.css'
 const $toast = useToast()
 export const useUpdateStore = defineStore('update', {
   actions: {
-    async getUpdates(values: { [key: string]: string }) {
+    async getUpdates(values: { [key: string]: string }, handle: () => void) {
       const response: any = await fetchData('email-updates', 'post', {
         emailAddress: values.email,
         fullName: values.name
@@ -16,12 +16,14 @@ export const useUpdateStore = defineStore('update', {
           type: 'success',
           position: 'top-right'
         })
+        handle()
       } else {
         $toast.open({
           message: 'Something went wrong!',
           type: 'error',
           position: 'top-right'
         })
+        handle()
       }
     }
   }
