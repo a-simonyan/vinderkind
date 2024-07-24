@@ -7,7 +7,7 @@
         <ButtonBasket :data="data" />
       </div>
       <div class="w-[88vw] sm:w-[472px] h-[400px] sm:h-[567px] poster">
-        <iframe :src="data.pdf" width="450px" height="550px"></iframe>
+        <iframe :src="data.pdf" width="450px" height="550px" class="w-full h-full"></iframe>
       </div>
       <div class="flex flex-col">
         <span class="text-[29px]/[32px] text-vivid-purple font-hebrew font-bold font-reforma">{{
@@ -19,7 +19,6 @@
         <span class="text-[21px]/[28px] font-sans font-bold mt-[18px] sm:mt-[33px] mb-[17px] block"
           >Audio Sample</span
         >
-
         <AudioPlayer :data="data" />
         <div class="hidden sm:flex mt-6">
           <ButtonBasket :data="data" />

@@ -1,6 +1,8 @@
 <template>
   <div class="bg-lavender">
-    <div class="container flex flex-col justify-center items-center pt-[18px] pb-[46px]">
+    <div
+      class="container flex flex-col justify-center items-center pt-[18px] pb-[46px] !pr-0 px-5 sm:px-[56px]"
+    >
       <div class="flex flex-col items-center justify-center">
         <span class="text-3xl/[39px] font-bold font-hebrew text-vivid-purple">געצייג</span>
         <span class="text-[17px]/[20px] text-light-purple font-semibold">Accessories</span>
@@ -8,7 +10,10 @@
       <div v-if="!lastAccessories?.length">
         <CustomLoader />
       </div>
-      <div v-else class="pt-7 max-w-[814px] w-full pl-0 px-5 sm:px-5 lg:px-0">
+      <div
+        v-else
+        class="pt-7 w-full pl-0 [&_.swiper-slide]:sm:!w-max [&_.swiper-wrapper]:!justify-start"
+      >
         <SharedSwiper :data="lastAccessories" :points="points">
           <template #default="{ index, content }">
             <CustomCart :data="content" :key="index" :allData="lastAccessories" />
@@ -49,7 +54,7 @@ export default defineComponent({
       points: {
         300: { slidesPerView: 1.5 },
         480: { slidesPerView: 2.5 },
-        740: { slidesPerView: 3 }
+        740: { slidesPerView: 3.1 }
       }
     }
   }

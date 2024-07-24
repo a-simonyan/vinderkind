@@ -1,5 +1,7 @@
 <template>
-  <div class="container pt-[27px] sm:pt-[107px] pb-[42px] flex flex-col items-center gap-[43px]">
+  <div
+    class="container pt-[27px] sm:pt-[107px] pb-[42px] flex flex-col items-center !pr-0 gap-[43px] px-5 sm:px-[56px]"
+  >
     <div class="flex items-center justify-center flex-col">
       <h5 class="text-[28px]/[37px] sm:text-3xl/[39px] font-bold text-vivid-purple font-hebrew">
         לעצטיגע טעקעס
@@ -11,7 +13,7 @@
     <div v-if="!lastIssues.length">
       <CustomLoader />
     </div>
-    <div v-else class="max-w-[1100px] w-full pl-0 pr-[23px] sm:px-5 xl:px-0">
+    <div v-else class="w-full pl-0 pr-0 [&_.swiper-wrapper]:justify-start">
       <SharedSwiper :data="lastIssues" :points="points">
         <template #default="{ index, content }">
           <CustomCart :data="content" :key="index" :preview="true" />
@@ -42,7 +44,7 @@ export default defineComponent({
         480: { slidesPerView: 2.5 },
         640: { slidesPerView: 3 },
         740: { slidesPerView: 3.5 },
-        1024: { slidesPerView: 4.1 }
+        1024: { slidesPerView: 4.05 }
       }
     }
   },
