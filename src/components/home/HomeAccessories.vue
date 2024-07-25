@@ -10,10 +10,7 @@
       <div v-if="!lastAccessories?.length">
         <CustomLoader />
       </div>
-      <div
-        v-else
-        class="pt-7 w-full pl-0 [&_.swiper-slide]:sm:!w-max [&_.swiper-wrapper]:!justify-start"
-      >
+      <div v-else class="pt-7 w-full pl-0 [&_.swiper-wrapper]:!justify-start">
         <SharedSwiper :data="lastAccessories" :points="points">
           <template #default="{ index, content }">
             <CustomCart :data="content" :key="index" :allData="lastAccessories" />
@@ -54,7 +51,7 @@ export default defineComponent({
       points: {
         300: { slidesPerView: 1.5 },
         480: { slidesPerView: 2.5 },
-        740: { slidesPerView: 3.1 }
+        1024: { slidesPerView: 4.05 }
       }
     }
   }

@@ -16,12 +16,22 @@
           <span class="text-xl font-bold text-vivid-purple font-hebrew">כאפ א בליק</span>
         </button>
       </div>
-      <img
-        :src="data.img"
-        alt="cart"
-        draggable="false"
-        style="height: 285px; object-fit: contain"
-      />
+      <div v-if="data.img">
+        <img
+          :src="data.img"
+          alt="cart"
+          draggable="false"
+          style="height: 285px; object-fit: contain"
+        />
+      </div>
+      <div v-else>
+        <img
+          src="../../assets/images/broken.svg"
+          alt="cart"
+          draggable="false"
+          style="height: 285px; object-fit: contain"
+        />
+      </div>
     </div>
     <span
       class="text-[15px]/[16px] sm:text-lg/[23px] font-medium sm:font-bold text-vivid-purple font-hebrew mt-[10px] block"

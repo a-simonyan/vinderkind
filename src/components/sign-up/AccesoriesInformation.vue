@@ -3,7 +3,7 @@
     <h5 class="text-[19px]/[22px] sm:text-[27px]/[31px] font-semibold mt-[17px] mb-[13px]">
       Accessories
     </h5>
-    <div v-if="lastAccessories?.length">
+    <div v-if="lastAccessories?.length" class="flex flex-col gap-4">
       <div v-for="(cart, index) in lastAccessories" :key="index" class="w-full flex justify-center">
         <div class="rounded-small border border-charcoal py-4 px-4 sm:px-6 flex gap-5 w-full">
           <div @click="handleAddAccesories(cart)" class="h-max">

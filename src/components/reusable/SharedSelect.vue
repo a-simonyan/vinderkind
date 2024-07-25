@@ -72,7 +72,7 @@ export default defineComponent({
       type: String
     },
     data: {
-      type: Array as () => ListItem[],
+      type: Object,
       required: true
     }
   },

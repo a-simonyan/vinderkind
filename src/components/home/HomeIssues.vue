@@ -42,8 +42,6 @@ export default defineComponent({
       points: {
         300: { slidesPerView: 1.5 },
         480: { slidesPerView: 2.5 },
-        640: { slidesPerView: 3 },
-        740: { slidesPerView: 3.5 },
         1024: { slidesPerView: 4.05 }
       }
     }

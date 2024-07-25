@@ -77,9 +77,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import SharedCheckBox from '@/components/reusable/SharedCheckBox.vue'
+import SharedSelect from '@/components/reusable/SharedSelect.vue'
+import IconBasket from '@/components/icons/IconBasket.vue'
 import { Field } from 'vee-validate'
 export default defineComponent({
-  components: { SharedCheckBox, Field },
+  components: { SharedCheckBox, Field, SharedSelect, IconBasket },
   props: {
     publication: {
       type: Object,
