@@ -1,7 +1,7 @@
 <template>
   <div class="bg-lavender">
     <div
-      class="container flex flex-col justify-center items-center pt-[18px] pb-[46px] !pr-0 px-5 sm:px-[56px]"
+      class="container flex flex-col justify-center items-center pt-[18px] pb-[46px] lg:px-[56px]"
     >
       <div class="flex flex-col items-center justify-center">
         <span class="text-3xl/[39px] font-bold font-hebrew text-vivid-purple">געצייג</span>
@@ -51,7 +51,8 @@ export default defineComponent({
       points: {
         300: { slidesPerView: 1.5 },
         480: { slidesPerView: 2.5 },
-        1024: { slidesPerView: 4.05 }
+        870: { slidesPerView: 3.5 },
+        1100: { slidesPerView: 4.05 }
       }
     }
   }

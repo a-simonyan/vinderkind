@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container pt-[27px] sm:pt-[107px] pb-[42px] flex flex-col items-center !pr-0 gap-[43px] px-5 sm:px-[56px]"
+    class="container pt-[27px] sm:pt-[107px] pb-[42px] flex flex-col items-center gap-[43px] lg:px-[56px]"
   >
     <div class="flex items-center justify-center flex-col">
       <h5 class="text-[28px]/[37px] sm:text-3xl/[39px] font-bold text-vivid-purple font-hebrew">
@@ -42,7 +42,8 @@ export default defineComponent({
       points: {
         300: { slidesPerView: 1.5 },
         480: { slidesPerView: 2.5 },
-        1024: { slidesPerView: 4.05 }
+        870: { slidesPerView: 3.5 },
+        1100: { slidesPerView: 4.05 }
       }
     }
   },

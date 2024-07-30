@@ -1,6 +1,11 @@
 <template>
   <div class="w-full">
-    <swiper :breakpoints="points" :spaceBetween="15" :initialSlide="1">
+    <swiper
+      :breakpoints="points"
+      :spaceBetween="15"
+      :initialSlide="data.length"
+      class="!px-5 lg:!px-0"
+    >
       <swiper-slide v-for="(slideContent, index) in data" :key="index" :virtualIndex="index">
         <slot :index="index" :content="slideContent"></slot>
       </swiper-slide>
