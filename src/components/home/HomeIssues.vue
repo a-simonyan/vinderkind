@@ -55,7 +55,7 @@ export default defineComponent({
 
     onMounted(async () => {
       await lastIssuesStore.fetchLastIssues()
-      lastIssues.value = lastIssuesStore.lastIssues
+      lastIssues.value = lastIssuesStore.lastIssues.reverse()
     })
 
     return {

@@ -1,9 +1,9 @@
 <template>
   <div
-    class="group flex flex-col items-center rounded-small border border-vivid-purple px-2 sm:px-[13px] pt-[7px] pb-[15px] max-w-[209px] sm:max-w-[258px] w-full"
+    class="group flex flex-col items-center rounded-small border border-vivid-purple pt-[7px] pb-[15px] max-w-[209px] sm:max-w-[258px] w-full"
     :class="customClass"
   >
-    <div @click="openModal" class="relative">
+    <div @click="openModal" class="relative w-full">
       <div
         v-if="preview"
         class="absolute h-full invisible items-center opacity-0 w-full flex justify-center group-hover:visible group-hover:opacity-100 transition-all ease-linear duration-300"
@@ -33,14 +33,16 @@
         />
       </div>
     </div>
-    <span
-      class="text-[15px]/[16px] sm:text-lg/[23px] font-medium sm:font-bold text-vivid-purple font-hebrew mt-[10px] block"
-      >{{ data.name }}</span
-    >
-    <span class="text-lg/[19px] sm:text-xl/[27px] text-vivid-purple font-hebrew">{{
-      data.description
-    }}</span>
-    <ButtonBasket :data="data" />
+    <div class="px-2 sm:px-[13px] flex flex-col items-center w-full">
+      <span
+        class="text-[15px]/[16px] sm:text-lg/[23px] font-medium sm:font-bold text-vivid-purple font-hebrew mt-[10px] block"
+        >{{ data.name }}</span
+      >
+      <span class="text-lg/[19px] sm:text-xl/[27px] text-vivid-purple font-hebrew">{{
+        data.description
+      }}</span>
+      <ButtonBasket :data="data" />
+    </div>
   </div>
   <SharedModal v-model="open" v-if="preview" customStyle="w-full">
     <CartPreviewModal :data="data" />
