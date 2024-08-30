@@ -29,11 +29,13 @@ interface Subscription {
 
 interface OrderState {
   subscriptions: Subscription[]
+  covers: { image: string; name: string }[]
 }
 
 export const useOrderStore = defineStore('order', {
   state: (): OrderState => ({
-    subscriptions: []
+    subscriptions: [],
+    covers: []
   }),
   actions: {
     async submitOrder(values: Object) {
@@ -53,6 +55,14 @@ export const useOrderStore = defineStore('order', {
           type: 'error',
           position: 'top-right'
         })
+      }
+    },
+    async fetchCovers() {
+      try {
+        const response: any = await fetchData('getCoverImages', 'get', null, true)
+        this.covers = response?.data // Use 'this.covers' to update state
+      } catch (error) {
+        console.error('Error fetching covers:', error)
       }
     }
   }

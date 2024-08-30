@@ -28,7 +28,22 @@
       <CustomField name="cartName" :rules="[required]" placeholder="Name on card" />
       <span class="text-red-500 text-xs pt-1">{{ errors.cartName }}</span>
     </div>
-    <CustomField name="cardNumber" :rules="[required, cardValidation]" placeholder="Card number" />
+    <div class="relative">
+      <CustomField
+        v-model="cardNumber"
+        name="cardNumber"
+        :value="cardNumber"
+        :rules="[required, cardValidation]"
+        placeholder="Card number"
+        v-mask="'####-####-####-####'"
+      />
+      <img
+        v-if="cardLogoUrl"
+        :src="cardLogoUrl"
+        alt="Card Logo"
+        class="absolute top-1/2 right-5 transform -translate-y-1/2 w-12"
+      />
+    </div>
     <span class="text-red-500 text-xs pt-1">{{ errors.cardNumber }}</span>
   </div>
   <div
@@ -47,6 +62,7 @@
           class="text-base sm:text-xl placeholder:text-silver focus:outline-none h-full w-full"
           @blur="focusField"
           @focus="focusField"
+          v-mask="field.mask"
         />
         <span
           :class="isFocused ? 'opacity-100 z-[1]' : ' opacity-0 z-0'"
@@ -87,12 +103,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, computed } from 'vue'
 import IconCoupon from '@/components/icons/IconCoupon.vue'
 import { Field } from 'vee-validate'
 import CustomField from '@/components/reusable/CustomField.vue'
 import { required } from '@/utills/helpers/validation'
 import { useTotalPaymentStore } from '@/stores/totalPayment'
+import cardLogo from '@/utills/helpers/constant'
+
 export default defineComponent({
   components: { IconCoupon, Field, CustomField },
   data() {
@@ -110,11 +128,14 @@ export default defineComponent({
       required: true
     }
   },
+
   setup() {
-    const cardValidation = (value: string) => {
+    const cardValidation = (value: string): boolean | string => {
+      const cleanedValue = value.replace(/\D/g, '')
       const regex = /^\d{16}$/
-      return regex.test(value) ? true : 'Invalid card'
+      return regex.test(cleanedValue) ? true : 'Invalid card'
     }
+    const cardNumber = ref('')
 
     const isDivVisible = ref(false)
     const viewMore = ref(false)
@@ -131,7 +152,17 @@ export default defineComponent({
     function focusField() {
       isFocused.value = true
     }
+    const phoneNumber = ref('')
 
+    const cardLogoUrl = computed(() => {
+      const number = cardNumber.value.replace(/\D/g, '')
+      for (const card of cardLogo) {
+        if (number.match(card.re)) {
+          return card.logo
+        }
+      }
+      return ''
+    })
     return {
       isDivVisible,
       toggleDivVisibility,
@@ -144,7 +175,10 @@ export default defineComponent({
       totalPayment,
       calculateProduct,
       calculateZip,
-      cardValidation
+      cardValidation,
+      phoneNumber,
+      cardNumber,
+      cardLogoUrl
     }
   }
 })

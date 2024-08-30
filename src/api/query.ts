@@ -1,9 +1,14 @@
 import axios from 'axios'
 
 const API_URL = 'https://staging.vinderkind.com/api/'
-
-export const fetchData = async (path: string, method = 'get', body: object | null = null) => {
-  const url = `${API_URL}${path}`
+const API_URL_DEEVOCH = 'https://www.deevoch.com/api/'
+export const fetchData = async (
+  path: string,
+  method = 'get',
+  body: object | null = null,
+  api = false
+) => {
+  const url = `${api ? API_URL_DEEVOCH : API_URL}${path}`
 
   try {
     let response

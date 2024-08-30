@@ -16,21 +16,47 @@
             </ul>
           </div>
         </div>
-        <div class="hidden lg:flex justify-center mt-4">
-          <img
-            src="../../assets/images/cards-subscribe.png"
-            alt="subscribe cards"
-            class="max-w-[527px] w-full"
-            draggable="false"
-          />
+        <div class="hidden justify-center mt-4 lg:flex">
+          <div v-if="covers?.length" class="relative w-full grid grid-cols-2 gap-4 mt-24 -ml-4">
+            <div
+              v-for="(cart, index) in covers"
+              :key="index"
+              class="relative max-w-[263px] h-[350px] w-full transform transition-transform duration-300 rotate-12"
+              :class="{
+                'ml-10 xl:ml-20 -mt-10': index % 2 === 0,
+                '-mt-20': index % 2 !== 0,
+                '-ml-10': index === 3
+              }"
+            >
+              <img :src="cart.image" class="max-w-[263px] h-full w-full object-cover" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
+import { useOrderStore } from '@/stores/sign-up'
+interface Cover {
+  image: string
+  name: string
+}
 export default defineComponent({
-  components: {}
+  components: {},
+  setup() {
+    const store = useOrderStore()
+    const covers = ref<Cover[]>([])
+
+    onMounted(async () => {
+      await store.fetchCovers()
+      covers.value = store.covers
+    })
+
+    return {
+      covers
+    }
+  }
 })
 </script>

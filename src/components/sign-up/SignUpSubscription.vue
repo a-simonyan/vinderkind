@@ -64,15 +64,18 @@ export default defineComponent({
       paymentInfo: [
         {
           placeholder: 'Expiration Date',
-          field: 'expDate'
+          field: 'expDate',
+          mask: '##/##'
         },
         {
           placeholder: 'CVV',
-          field: 'cvv'
+          field: 'cvv',
+          mask: '####'
         },
         {
           placeholder: 'Billing ZIP Code',
-          field: 'billing'
+          field: 'billing',
+          mask: '#####'
         }
       ],
       isEnabled: false

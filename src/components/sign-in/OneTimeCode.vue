@@ -41,7 +41,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Form as CustomForm } from 'vee-validate'
 import { signInStore } from '@/stores/sign-in'
 
 export default defineComponent({

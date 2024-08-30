@@ -17,8 +17,8 @@
       @updateZipCode="updateZipCode"
     />
     <span v-if="dataZip?.err" class="text-red-500 text-xs"
-      >We currently don’t deliver to this zip code. Please check back in the coming months.</span
-    >
+      >We currently don’t deliver to this zip code. Please check back in the coming months.
+    </span>
     <div
       :class="dataZip?.status ? 'opacity-100' : 'opacity-50 pointer-events-none'"
       class="transition-all duration-300 ease-linear"
@@ -146,14 +146,14 @@ export default defineComponent({
       if (value.length === 5) {
         fetchData(`zip/${value}`).then((res) => {
           this.dataZip = res
-          this.$emit('enableSection', true)
           // @ts-ignore
           const defoultPlan = res?.data.filter((it) => it.type === 'yearly')[0]
-
+          if (defoultPlan) {
+            this.$emit('enableSection', true)
+          }
           this.handleZipsPayment({ id, ...defoultPlan })
         })
       } else {
-        this.dataZip = []
         this.$emit('enableSection', false)
         this.deleteZip(id)
       }

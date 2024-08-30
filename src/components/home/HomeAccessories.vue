@@ -10,7 +10,10 @@
       <div v-if="!lastAccessories?.length">
         <CustomLoader />
       </div>
-      <div v-else class="pt-7 w-full pl-0 [&_.swiper-wrapper]:!justify-end">
+      <div
+        v-else
+        class="pt-7 w-full pl-0 [&_.swiper-wrapper]:justify-start [&_.swiper-wrapper]:sm:!justify-center"
+      >
         <SharedSwiper :data="lastAccessories" :points="points">
           <template #default="{ index, content }">
             <CustomCart :data="content" :key="index" :allData="lastAccessories" />
