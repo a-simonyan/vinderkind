@@ -17,18 +17,17 @@
           </div>
         </div>
         <div class="hidden justify-center mt-4 lg:flex">
-          <div v-if="covers?.length" class="relative w-full grid grid-cols-2 gap-4 mt-24 -ml-4">
+          <div v-if="covers?.length" class="relative w-full max-w-[600px] h-[600px] ml-14 mt-10">
             <div
-              v-for="(cart, index) in covers"
+              v-for="(cart, index) in covers.slice(0, 4)"
               :key="index"
-              class="relative max-w-[263px] h-[350px] w-full transform transition-transform duration-300 rotate-12"
-              :class="{
-                'ml-10 xl:ml-20 -mt-10': index % 2 === 0,
-                '-mt-20': index % 2 !== 0,
-                '-ml-10': index === 3
-              }"
+              class="absolute"
+              :style="getTransformStyle(index)"
             >
-              <img :src="cart.image" class="max-w-[263px] h-full w-full object-cover" />
+              <img
+                :src="cart.image"
+                class="max-w-[300px] xl:max-w-[340px] h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -56,6 +55,23 @@ export default defineComponent({
 
     return {
       covers
+    }
+  },
+  methods: {
+    getTransformStyle(index: number) {
+      // Dynamically generate the transform matrix based on the index
+      const skewValues = [0.07, 0.19, 0.33, 0.49] // Adjust these values for more/less skew
+      const scaleValues = [1, 0.98, 0.95, 0.91] // Adjust these values for more/less scaling
+      const skewFactor = skewValues[index % 4]
+      const scale = scaleValues[index % 4]
+      const transform = `matrix(${scale}, ${skewFactor}, ${-skewFactor}, ${scale}, 0, 0)`
+      const zIndex = this.covers.length - index
+      const left = `${index * 35}px`
+      return {
+        transform,
+        zIndex,
+        left
+      }
     }
   }
 })

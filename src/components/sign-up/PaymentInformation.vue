@@ -14,11 +14,15 @@
     />
   </button>
   <div v-if="isDivVisible" class="flex flex-col mt-[17px] relative">
-    <CustomField name="promocode" :rules="[required]" placeholder="Promo Code" />
-    <button @click.prevent="" class="absolute top-[14px] right-4 text-lg text-vivid-purple">
+    <CustomField name="promocode" :rules="[required]" placeholder="Promo Code" v-model="promo" />
+    <button
+      @click.prevent="handlePromoApply"
+      class="absolute top-[14px] right-4 text-lg text-vivid-purple"
+    >
       Apply
     </button>
     <span class="text-sm pt-1 text-red-500">{{ errors.promocode }}</span>
+    <span v-if="promorErr.length" class="text-red-500 text-xs">{{ promorErr }}</span>
   </div>
   <h5 class="text-[19px]/[22px] sm:text-[27px]/[31px] font-semibold mt-[17px] mb-[13px]">
     Payment infomation
@@ -136,7 +140,8 @@ export default defineComponent({
       return regex.test(cleanedValue) ? true : 'Invalid card'
     }
     const cardNumber = ref('')
-
+    const promo = ref('')
+    const promorErr = ref('')
     const isDivVisible = ref(false)
     const viewMore = ref(false)
     function toggleDivVisibility() {
@@ -163,6 +168,13 @@ export default defineComponent({
       }
       return ''
     })
+    const handlePromoApply = () => {
+      if (promo.value.length < 5) {
+        promorErr.value = 'Not a valid Promo Code'
+      } else {
+        promorErr.value = ''
+      }
+    }
     return {
       isDivVisible,
       toggleDivVisibility,
@@ -178,7 +190,10 @@ export default defineComponent({
       cardValidation,
       phoneNumber,
       cardNumber,
-      cardLogoUrl
+      cardLogoUrl,
+      handlePromoApply,
+      promo,
+      promorErr
     }
   }
 })
