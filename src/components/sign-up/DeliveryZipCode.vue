@@ -5,13 +5,24 @@
       <div class="relative field">
         <Field
           :name="'zip' + '-' + index"
-          :rules="required"
+          :rules="[required]"
           class="w-full border rounded-small shadow-gray pt-4 pb-[13px] px-[18px] h-[49px] sm:h-[53px] text-[19px] sm:text-xl border-black placeholder:text-silver"
           placeholder="Delivery ZIP Code"
           :model-value="zipCode"
           @input="
             (e: Event) => {
-              $emit('update:modelValue', (e.target as HTMLInputElement)?.value)
+              const val = (e.target as HTMLInputElement)?.value
+              $emit('update:modelValue', val)
+
+              if (val.length > 5) {
+                zipErr = 'ZIP code cannot be more than 5 digits.'
+              }
+              if (val.length < 5 && val.length !== 0) {
+                zipErr = 'ZIP code must be exactly 5 digits.'
+              }
+              if (val.length === 5) {
+                zipErr = ''
+              }
             }
           "
           @focus="focusField"
@@ -23,9 +34,8 @@
           >Delivery ZIP Code</span
         >
       </div>
-      <span class="text-red-500 text-xs pt-1 block absolute">{{
-        errors['zip' + '-' + index]
-      }}</span>
+      <span class="text-red-500 text-xs pt-1 block">{{ errors['zip' + '-' + index] }}</span>
+      <span v-if="zipErr.length" class="text-red-500 text-xs pt-1 block">{{ zipErr }}</span>
       <IconCheck v-if="checkZip" class="absolute top-4 sm:top-5 right-[22px] w-4 sm:w-max" />
     </div>
   </div>
@@ -56,13 +66,16 @@ export default defineComponent({
       required: true
     }
   },
+  data() {
+    return {
+      zipErr: ''
+    }
+  },
   setup() {
     const isFocused = ref(false)
-
     function focusField() {
       isFocused.value = true
     }
-
     return {
       isFocused,
       focusField,

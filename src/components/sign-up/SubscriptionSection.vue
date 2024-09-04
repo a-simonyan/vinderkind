@@ -147,13 +147,14 @@ export default defineComponent({
         fetchData(`zip/${value}`).then((res) => {
           this.dataZip = res
           // @ts-ignore
-          const defoultPlan = res?.data.filter((it) => it.type === 'yearly')[0]
+          const defoultPlan = res?.data?.filter((it) => it.type === 'yearly')[0]
           if (defoultPlan) {
             this.$emit('enableSection', true)
           }
           this.handleZipsPayment({ id, ...defoultPlan })
         })
       } else {
+        this.dataZip = []
         this.$emit('enableSection', false)
         this.deleteZip(id)
       }
