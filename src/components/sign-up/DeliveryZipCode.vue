@@ -14,13 +14,13 @@
               const val = (e.target as HTMLInputElement)?.value
               $emit('update:modelValue', val)
 
-              if (val.length > 5) {
-                zipErr = 'ZIP code cannot be more than 5 digits.'
-              }
-              if (val.length < 5 && val.length !== 0) {
-                zipErr = 'ZIP code must be exactly 5 digits.'
-              }
-              if (val.length === 5) {
+              if (val.length >= 5) {
+                if (val.length > 5) {
+                  zipErr = 'ZIP code cannot be more than 5 digits.'
+                } else {
+                  zipErr = ''
+                }
+              } else {
                 zipErr = ''
               }
             }

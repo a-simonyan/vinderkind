@@ -16,8 +16,8 @@
             </ul>
           </div>
         </div>
-        <div class="hidden justify-center mt-4 lg:flex">
-          <div v-if="covers?.length" class="relative w-full max-w-[600px] h-[600px] ml-14 mt-10">
+        <div class="hidden justify-start mt-4 lg:flex">
+          <div v-if="covers?.length" class="relative w-full max-w-[600px] h-[600px] mt-10">
             <div
               v-for="(cart, index) in covers.slice(0, 4)"
               :key="index"
@@ -64,9 +64,10 @@ export default defineComponent({
       const scaleValues = [1, 0.98, 0.95, 0.91] // Adjust these values for more/less scaling
       const skewFactor = skewValues[index % 4]
       const scale = scaleValues[index % 4]
-      const transform = `matrix(${scale}, ${skewFactor}, ${-skewFactor}, ${scale}, 0, 0)`
+      const transform =
+        index === 0 ? '' : `matrix(${scale}, ${skewFactor}, ${-skewFactor}, ${scale}, 0, 0)`
       const zIndex = this.covers.length - index
-      const left = `${index * 35}px`
+      const left = `${index * 18}px`
       return {
         transform,
         zIndex,

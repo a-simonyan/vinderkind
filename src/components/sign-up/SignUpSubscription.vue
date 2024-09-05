@@ -1,5 +1,5 @@
 <template>
-  <CustomForm v-slot="{ errors }" @submit="onSubmit" class="w-full lg:w-1/2">
+  <CustomForm v-slot="{ errors }" @submit="onSubmit" class="w-full lg:w-1/2 relative z-[8]">
     <div
       class="w-full pt-10 sm:pt-[46px] sm:pb-10 px-[23px] sm:pr-[54px] rounded-small bg-white lg:rounded-none -mt-1 lg:mt-0"
     >
