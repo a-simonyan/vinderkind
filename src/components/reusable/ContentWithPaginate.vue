@@ -10,7 +10,7 @@
     </div>
     <div v-if="paginatedItems.length">
       <div
-        class="flex flex-col-reverse lg:justify-start justify-center sm:flex-row-reverse sm:flex-wrap gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
+        class="grid grid-cols-2 sm:flex lg:justify-start justify-center sm:flex-row-reverse sm:flex-wrap gap-[13px] sm:gap-[30px] max-w-[1100px] w-full m-auto mt-10 sm:mt-[35px] mb-[35px] sm:mb-[45px]"
       >
         <div
           v-for="(cart, index) in paginatedItems"
@@ -42,7 +42,8 @@ export default defineComponent({
   components: { CustomCart, SharedPagination, CustomLoader },
   data: function () {
     return {
-      customClass: 'max-w-none'
+      customClass:
+        'max-w-none [&_img]:h-[193px] [&_img]:sm:h-[285px] [&_img]:w-full [&_img]:object-contain [&_img]:min-[400px]:object-cover [&_img]:sm:object-contain'
     }
   },
   props: {

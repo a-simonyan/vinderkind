@@ -40,7 +40,8 @@ export default {
         'bottom-4': 'center bottom -4rem'
       },
       boxShadow: {
-        gray: ' 0px 0px 6px #00000029'
+        gray: ' 0px 0px 6px #00000029',
+        dark: '-1px 3px 6px 0px #000000BE'
       }
     },
     container: {
