@@ -3,17 +3,15 @@
     class="group flex flex-col items-center rounded-small border border-vivid-purple pt-[7px] pb-[15px] max-w-[209px] sm:max-w-[258px] w-full relative"
     :class="customClass"
   >
-    <!-- <div
-      class="label shadow-dark after:bg-golden-yellow before:bg-golden-yellow h-8 w-[70%] absolute z-[8] right-0 top-[18px] text-vivid-purple text-base line-clamp-1 font-bold flex items-center justify-end pr-5 before:h-1/2 before:w-full before:absolute before:right-[-5px] before:top-0 after:h-1/2 after:w-full after:absolute after:right-[-5px] after:bottom-0"
-    >
-      יעצטיגע אויסגאבע
-    </div> -->
     <div
-      class="w-[70%] h-8 absolute z-[8] right-0 top-[18px] text-vivid-purple text-base line-clamp-1 font-bold flex items-center justify-end"
+      v-if="data.label"
+      class="w-[70%] h-8 absolute z-[8] right-0 top-[18px] text-vivid-purple text-base line-clamp-1 font-bold flex items-center justify-end label"
     >
-      <img src="../../assets/images/label.png" class="!h-max absolute" />
-      <span class="absolute text-end right-5 top-0 md:top-[2px] line-clamp-1">
-        יעצטיגע אויסגאבע</span
+      <img src="../../assets/images/label.svg" class="!h-max absolute -right-2" />
+      <span
+        class="absolute text-end right-2 md:right-3 xl:right-5 top-[5px] md:top-[2px] line-clamp-1 font-hebrew text-xs sm:text-sm md:text-base"
+      >
+        {{ data.label }}</span
       >
     </div>
     <div @click="openModal" class="relative w-full">
