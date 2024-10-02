@@ -9,7 +9,7 @@
     >
       <img src="../../assets/images/label.svg" class="!h-max absolute -right-2" />
       <span
-        class="absolute text-end right-2 md:right-3 xl:right-5 top-[5px] md:top-[2px] line-clamp-1 font-hebrew text-xs sm:text-sm md:text-base"
+        class="absolute text-end right-2 md:right-3 top-[5px] md:top-[2px] line-clamp-1 font-hebrew text-xs sm:text-sm md:text-base"
       >
         {{ data.label }}</span
       >

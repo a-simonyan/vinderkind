@@ -11,7 +11,7 @@
       @click.prevent="handleChangeCard(currentData)"
       class="px-[15px] cursor-pointer flex items-center bg-vivid-purple h-[43px] sm:h-[54px] rounded-small justify-center py-[6px] sm:py-3 w-full text-white gap-[13px] sm:gap-5 mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
     >
-      <div class="flex gap-[21px] justify-center items-center">
+      <div dir="auto" class="flex gap-[21px] justify-center items-center">
         <IconBasket class="[&_path]:stroke-white w-[26px]" />
         <span class="text-base/[22px] sm:text-[21px] font-bold font-sans"
           >${{ currentData.price }}</span
@@ -19,6 +19,7 @@
       </div>
     </div>
     <div
+      dir="auto"
       v-else
       class="flex items-center w-full justify-between px-2 sm:px-[15px] h-[43px] sm:h-[54px] cursor-pointer bg-vivid-purple rounded-small py-3 text-white mt-3 hover:opacity-85 transition-all duration-200 ease-linear"
     >
